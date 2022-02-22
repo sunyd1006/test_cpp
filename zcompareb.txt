@@ -1,0 +1,7 @@
+    // std::vector<std::string>> vecOfli(li914.begin(), li914.end());
+    std::vector<std::string> vecOfli;
+    vecOfli.assign(li914.cbegin(), li914.cend());
+    for (const auto &ofli : vecOfli) {
+        std::cout << ofli << std::endl;
+    }
+    // std::cout << std::endl;

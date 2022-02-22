@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="7cb76ff7-d8a4-48c1-9d69-9ed93939dd97" name="dev">
+        <fileTransfer rootFolder="/home/sunyindong.syd/test_cpp" accessType="SFTP" host="11.158.199.43" port="22" sshConfigId="435aaf71-b3db-4d35-a079-25b21c62b508" sshConfig="sunyindong.syd@11.158.199.43:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="14df0241-de39-4889-ad94-9d93f8ed0a47" name="odps_src">
+        <fileTransfer rootFolder="/home/sunyindong.syd/odps_src" accessType="SFTP" host="11.158.199.43" port="22" sshConfigId="435aaf71-b3db-4d35-a079-25b21c62b508" sshConfig="sunyindong.syd@11.158.199.43:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+    <groups>
+      <group>
+        <name>ali</name>
+        <servers>
+          <name value="dev" />
+          <name value="odps_src" />
+        </servers>
+      </group>
+    </groups>
+  </component>
+</project>
