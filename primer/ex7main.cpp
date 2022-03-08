@@ -8,9 +8,9 @@
 using namespace  std;
 
 // g++ 编译2个文件，-c生成可执行main
-// g++ Sales_data.cpp ex7.cpp -o main && ./main
+// g++ Sales_data.cpp ex7main.cpp -o main && ./main
 int main() {
-    cout << "\n case: ex7.2 " << endl;
+    cout << "\n case: ex7.word_transformation_bad.txt " << endl;
     Sales_data item("aaaa", 10, 10);
     item.printString();
 

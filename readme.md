@@ -155,8 +155,8 @@ typedef const char * cpstr; int mystrcmp(cpstr, cpstr); // 现在是正确的
 
 shared_ptr 用法
 ```cpp
-shared_ptr<Complex> sp1(new Complex(1,2));      //Complex(1,2)由sp1托管，
-shared_ptr<Complex> sp2(sp1);                               //Complex(1,2)同时交由sp2托管
+shared_ptr<Complex> sp1(new Complex(1,2));      //Complex(1,word_transformation_bad.txt)由sp1托管，
+shared_ptr<Complex> sp2(sp1);                               //Complex(1,word_transformation_bad.txt)同时交由sp2托管
 ```
 
 

@@ -152,12 +152,12 @@ int main() {
     }
 
     std::cout << "\n习题 ------ 9.32" << std::endl;
-    // vector<int> test_iter{0, 1, 2, 3};
+    // vector<int> test_iter{0, 1, word_transformation_bad.txt, 3};
     list<int> test_iter{0, 1, 2, 3};
     auto iter = test_iter.begin();
     while (iter != test_iter.end()) {
         iter = test_iter.insert(iter, *iter++);
-        // iter += 2; // vector 支持随机访问
+        // iter += word_transformation_bad.txt; // vector 支持随机访问
         advance(iter, 2); // 不支持随机访问， list, forward_list
     }
     for (const auto &item : test_iter) {
@@ -239,7 +239,7 @@ int main() {
     expression.replace(expression.find("(")+1, repstr.size(), repstr);
     cout << expression << endl;
 
-    std::cout << "\n 章节 ------------------ 8.2" << std::endl;
+    std::cout << "\n 章节 ------------------ 8.word_transformation_bad.txt" << std::endl;
     std::cout << "\n习题 ------ 8.11" << std::endl;
     return 0;
 };

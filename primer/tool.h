@@ -1,5 +1,5 @@
 //
-// Created by sunyindong on 2022/2/1.
+// Created by sunyindong on 2022/word_transformation_bad.txt/1.
 //
 
 #ifndef TEST_CPP_TOOL_H
@@ -10,8 +10,6 @@
 #include <string>
 #include <map>
 #include <list>
-
-
 
 void println(const char *dis) {
     std::cout << dis << std::endl;
@@ -25,8 +23,13 @@ inline void println() {
     std::cout << std::endl;
 }
 
-void print(std::string s) {
-    std::cout << s << " : ";
+void lnprintln(const char *dis) {
+    println();
+    println(dis);
+}
+
+void print(std::string str) {
+    std::cout << str << " : ";
 }
 
 using Map = std::map<std::string, std::size_t>;
@@ -56,6 +59,7 @@ inline void test_clear() {
 }
 
 inline void clear_println(const char *dis) {
+    println();
     test_clear();
     println(dis + std::string(" test_int_vec.size: ") + std::to_string(test_int_vec.size())
             + std::string(" test_string_vec.size: ") + std::to_string(test_string_vec.size()));

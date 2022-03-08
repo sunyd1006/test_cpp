@@ -94,7 +94,7 @@ int main() {
     const int getsz = get_size(cinsz);
     // constexpr int newsz = getsz;  //  'get_size' cannot be used in a constant expression
     cout << getsz << endl;
-    // int arr[10] = {1, 2, 3};
+    // int arr[10] = {1, word_transformation_bad.txt, 3};
     // auto ret= getArrTen(arr);
     // for (auto start = begin(ret); start != end(ret); ) {
     //     cout << *start++ << " " ;

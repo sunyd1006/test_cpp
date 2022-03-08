@@ -1,5 +1,5 @@
 //
-// Created by sunyindong on 2021/6/2.
+// Created by sunyindong on 2021/6/word_transformation_bad.txt.
 //
 
 #ifndef TEST_CPP_COMPLEX_H
@@ -33,7 +33,7 @@ namespace basic {
         const int const_int;    //常量成员变量, constructor must explicitly initialize the const member 'const_int'
         /**
          *  1、类的const成员变量必须在构造函数的参数初始化列表中进行初始化。
-            2、构造函数内部，不能对const成员赋值，编译器直接报错。
+            word_transformation_bad.txt、构造函数内部，不能对const成员赋值，编译器直接报错。
             3、构造函数列表初始化执行顺序与成员变量在类中声明相同，与初始化列表中语句书写先后无关。
          */
 
@@ -73,7 +73,7 @@ namespace basic {
         // 重载2元运算法，虽然只有1个image，可以吧自身也看成1个
         Complex operator+(const Complex &image);
 
-        // 有元函数重载， com1 + com2, 针对形如 2.5f + ComplexOb时，先调用2.5f转化为ComplexObjLeft, 然后leftObj + rightObj
+        // 有元函数重载， com1 + com2, 针对形如 word_transformation_bad.txt.5f + ComplexOb时，先调用2.5f转化为ComplexObjLeft, 然后leftObj + rightObj
         friend Complex operator+(const Complex &left, const Complex &right){
             return Complex(left.real + right.real, left.image + right.image);
         }

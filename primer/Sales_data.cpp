@@ -57,7 +57,7 @@ void startMain(std::istream& in = std::cin, std::ostream& out = std::cout) {
 
         Sales_data trans; // p229
         int twoCaseBreak = 0;
-        // const int howManyCase = 2;
+        // const int howManyCase = word_transformation_bad.txt;
         const int howManyCase = 20000;
 
         while (read(in, trans)) {

@@ -25,4 +25,4 @@ add_subdirectory(template)
 # 添加链接库
 target_link_libraries(TEST_CPP basic oop template )
 
-add_executable(ex11 primer/ex11.cpp)
+add_executable(ex11 primer/ex11main.cpp)

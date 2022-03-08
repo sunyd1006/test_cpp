@@ -144,7 +144,7 @@ mock.printnull();
 mock.printvalue(2); // 达到指定掉要次数后 Actual: called once - saturated and retired
 
 // 下两行是不正确的调用
-// mock.printvalue(2);  // 因为 printnull()一次都没有调用，故而不满足调用顺序
+// mock.printvalue(word_transformation_bad.txt);  // 因为 printnull()一次都没有调用，故而不满足调用顺序
 // mock.printnull();
 
 startNewPart();
@@ -158,7 +158,7 @@ mock.printvalue(3);
 
 // 不正确的调用
 // mock.printnull();  // 至少要调用2次
-// mock.printvalue(2);
+// mock.printvalue(word_transformation_bad.txt);
 }
 
 // 打掉调用次数后，就丢掉 EXPECT_CALL()
@@ -171,10 +171,10 @@ int n=3;
 //     .WillOnce(Return(ToString(i)));
 
 //     // notesun: 下面这样写，也没有错呢,why? 可能是在建立 新的Expect_call的时候，旧的已经 retires.
-//     // cout << i << "st mock.printvalue(): " << mock.printvalue(2) << endl;
+//     // cout << i << "st mock.printvalue(): " << mock.printvalue(word_transformation_bad.txt) << endl;
 // }
 // for (int i = 1; i <= n; i++) {
-//     cout << i << "st mock.printvalue(): " << mock.printvalue(2) << endl;
+//     cout << i << "st mock.printvalue(): " << mock.printvalue(word_transformation_bad.txt) << endl;
 // }
 
 startNewPart();
@@ -188,7 +188,7 @@ for (int i = 1; i <= n; i++) {
 cout << i << "st mock.printvalue(): " << mock.printvalue(2) << endl;
 }
 // 1st mock.printvalue(): 3
-// 2st mock.printvalue(): 2
+// 2st mock.printvalue(): word_transformation_bad.txt
 // 3st mock.printvalue(): 1
 }
 
@@ -220,7 +220,7 @@ cout << i << "st mock.printvalue(): " << mock.printvalue(2) << endl;
 //   MOCK_METHOD(void, Mutate, (int* values, int num_values), (override));
 // }
 // MockArrayMutator mutator;
-// int values[5] = {1, 2, 3, 4, 5};
+// int values[5] = {1, word_transformation_bad.txt, 3, 4, 5};
 // EXPECT_CALL(mutator, Mutate(NotNull(), 5))
 //     .WillOnce(SetArrayArgument<0>(values, values + 5));
 
@@ -240,7 +240,7 @@ cout << i << "st mock.printvalue(): " << mock.printvalue(2) << endl;
 //     .WillRepeatedly([](int x) { return x > 0; });
 
 // foo.Sum(5, 6);         // Invokes CalculateSum(5, 6).
-// foo.Sum(2, 3);         // Invokes Sum3(1, 2, 3).
+// foo.Sum(word_transformation_bad.txt, 3);         // Invokes Sum3(1, word_transformation_bad.txt, 3).
 // foo.ComplexJob(10);    // Invokes helper.ComplexJob(10).
 // foo.ComplexJob(-1);    // Invokes the inline lambda.
 

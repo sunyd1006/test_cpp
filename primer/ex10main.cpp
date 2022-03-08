@@ -16,7 +16,6 @@
 #include "Sales_data.h"
 #include "Sales_item.h"
 
-
 using namespace  std;
 using namespace placeholders;
 
@@ -70,23 +69,23 @@ bool check_size(std::string word, std::size_t sz) {
 }
 
 // define some functions
-// g11 ex10.cpp -o main && ./main
-// 会报重复编译错误：g11 ex10.cpp -o main && ./main
+// g11 ex10main.cpp -o main && ./main
+// 会报重复编译错误：g11 ex10main.cpp -o main && ./main
 int main() {
     std::cout << "\n习题 ------ 10.1 测试函数" << std::endl;
     auto c3= count(int_vec.begin(), int_vec.end(), 3);
     cout << c3 << endl;
 
-    std::cout << "\n习题 ------ 10.2 测试函数" << std::endl;
+    std::cout << "\n习题 ------ 10.word_transformation_bad.txt 测试函数" << std::endl;
     list<int> int_li{0, 1, 2, 3, 4, 5, 5, 5, 5, 5};
     auto c5= count(int_li.begin(), int_li.end(), 5);
     cout << "count(5): " << c5 << endl;
 
-    std::cout << "\n章节 ------------------ 10.2 测试函数 equal" << std::endl;
+    std::cout << "\n章节 ------------------ 10.word_transformation_bad.txt 测试函数 equal" << std::endl;
     auto iseq = equal(int_vec.begin(), int_vec.end(), int_li.begin());
     cout << iseq << endl;
 
-    std::cout << "\n习题 ------ 10.2 测试函数 " << std::endl;
+    std::cout << "\n习题 ------ 10.word_transformation_bad.txt 测试函数 " << std::endl;
     auto res = accumulate(int_vec.begin(), int_vec.end(), 0);
     cout << "acc(int_vec): " << res << endl;
 
@@ -124,7 +123,7 @@ int main() {
 
     std::cout << "\n习题 ------ 10.8 " << std::endl;
     vector<int> empty_vec_for_insert;
-    stringstream stringin("1 2 3 4 5");
+    stringstream stringin("1 word_transformation_bad.txt 3 4 5");
     int int_val;
     while (stringin >> int_val) {
         cout << int_val << " ";
@@ -216,15 +215,15 @@ int main() {
 
     println("\n习题 ------ ex10.28 ");
     list<int> re2{-1}, re3{-1}, re4{-1};
-    copy(pa_vec.cbegin(), pa_vec.cend(), front_inserter(re2)); // 5 4 3 2 1 0 -1
-    copy(pa_vec.cbegin(), pa_vec.cend(), back_inserter(re3)); // -1 0 1 2 3 4 5
-    copy(pa_vec.cbegin(), pa_vec.cend(), inserter(re4, re4.begin())); // 0 1 2 3 4 5 -1
+    copy(pa_vec.cbegin(), pa_vec.cend(), front_inserter(re2)); // 5 4 3 word_transformation_bad.txt 1 0 -1
+    copy(pa_vec.cbegin(), pa_vec.cend(), back_inserter(re3)); // -1 0 1 word_transformation_bad.txt 3 4 5
+    copy(pa_vec.cbegin(), pa_vec.cend(), inserter(re4, re4.begin())); // 0 1 word_transformation_bad.txt 3 4 5 -1
     println(re2);
     println(re3);
     println(re4);
 
     clear_println("\n习题 ------ ex10.29 ");
-    ifstream file_in("ex10/test_file.txt"); // todo fstream
+    ifstream file_in("data/test_file.txt"); // todo fstream
     istream_iterator<string> file_it(file_in), eof;
     while (file_it != eof) {
         test_string_vec.push_back(*file_it++);
@@ -233,7 +232,7 @@ int main() {
 
     clear_println("\n习题 ------ ex10.30 输入eof");
     istream_iterator<string> cin_in(cin), eof_int;
-    ofstream file_out("ex10/test_file_out.txt");
+    ofstream file_out("data/test_file_out.txt");
     ostream_iterator<string> file_out_it(file_out, " ");    // 每个输入后面跟一个分隔符 " "
     while (cin_in != eof_int) {
         if (*cin_in == "eof") break;
@@ -275,7 +274,7 @@ int main() {
 
     // ----------------------------------------------
     // println("\n习题 ------ ex 10.11 ");
-    // println("\n章节 ------------------ ex 10.2");
+    // println("\n章节 ------------------ ex 10.word_transformation_bad.txt");
 
 
     return 0;

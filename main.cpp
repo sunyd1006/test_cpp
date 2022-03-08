@@ -51,7 +51,7 @@ void testPointerRet(string* msg){
 int main() {
     string mulu =
             " 1 basic: "
-            " 2 oop: 测试导入，测试 重载运算法、有元函数、虚函数等等 "
+            " word_transformation_bad.txt oop: 测试导入，测试 重载运算法、有元函数、虚函数等等 "
             " 3 polymorphism："
             " - 静态多态：主要指的是函数重载overload, 不同的参数或不同的返回结果。因为编译的时间就确定了，叫编译时多态"
             " - 动态多态：虚成员函数实现，是在编译过程中动态确定的，称为运行时多态。"
@@ -278,17 +278,17 @@ int main() {
             cout << "template_func::TabsTemplate(1): " << templateDemo::MaxTemplate(1, 2) << endl;
         }
         if (whichTestShouldBeTest == "shared_ptr") {
-            shared_ptr<Complex> sp1(new Complex(1, 2));      //Complex(1,2)由sp1托管，
-            shared_ptr<Complex> sp2(sp1);                               //Complex(1,2)同时交由sp2托管
+            shared_ptr<Complex> sp1(new Complex(1, 2));      //Complex(1,word_transformation_bad.txt)由sp1托管，
+            shared_ptr<Complex> sp2(sp1);                               //Complex(1,word_transformation_bad.txt)同时交由sp2托管
             shared_ptr<Complex> sp3;
-            sp3 = sp2;                                                  //Complex(1,2)同时交由sp3托管
+            sp3 = sp2;                                                  //Complex(1,word_transformation_bad.txt)同时交由sp3托管
             cout << sp1->getImage() << "," << sp2->getImage() << "," << sp3->getImage() << endl;
-            Complex *p = sp3.get();                                     // get返回托管的指针，p 指向 Complex(1,2)
-            cout << p->getImage() << endl;  //输出 2
+            Complex *p = sp3.get();                                     // get返回托管的指针，p 指向 Complex(1,word_transformation_bad.txt)
+            cout << p->getImage() << endl;  //输出 word_transformation_bad.txt
             sp1.reset(new Complex(1, 3));    // reset导致托管新的指针, 此时sp1托管Complex(1,3)
             sp2.reset(new Complex(1, 4));    // sp2托管Complex(1,4)
             cout << sp1->getImage() << endl;                //输出 3
-            sp3.reset(new Complex(1, 5));    // sp3托管Complex(1,5),Complex(1,2)无人托管，被delete
+            sp3.reset(new Complex(1, 5));    // sp3托管Complex(1,5),Complex(1,word_transformation_bad.txt)无人托管，被delete
             cout << "end" << endl;
         }
         if (whichTestShouldBeTest == "test") {
