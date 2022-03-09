@@ -4,6 +4,7 @@
 #include <cstring>
 
 #include <stdexcept>
+#include "tool.h"
 
 using namespace  std;
 
@@ -38,12 +39,11 @@ void declare() {
 }
 
 int main() {
-    // cout <<  endl << "start ex5_25: " << endl;
-    cout <<  endl << "start ex5_25: " << endl;
+
+    clear_println("\n习题 ------ ex5_25: ");
     un_declare();
     declare();
 
     cout << endl << "================= tmp ============" << endl;
-
     return 0;
 };

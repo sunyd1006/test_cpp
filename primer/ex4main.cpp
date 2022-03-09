@@ -7,14 +7,13 @@
 #include <vector>
 #include <cstring>
 
+#include "tool.h"
+
 using namespace  std;
 
 int main() {
-    // cout <<  endl << "start ex3_40: " << endl;
-    cout << endl << "start ex:4.1" << endl;
+    clear_println("\n习题 ------ ex4.1 ");
     cout << (5 + 10 * 20/2) << endl;
-
-
     cout << endl << "================= tmp ============" << endl;
     vector<int> vec(5);
     int ival = 0;

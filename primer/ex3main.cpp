@@ -6,12 +6,13 @@
 #include <iterator>
 #include <vector>
 
-
+#include "tool.h"
 #include <cstring>
 
 using namespace  std;
 
-// g11 Sales_data.cpp ex3.cpp -o main && ./main
+// duplicate symbols:  g11 Sales_data.cpp ex3main.cpp -o main && ./main
+// g11 ex3main.cpp -o main && ./main
 int main() {
     // C风格字符串
     cout << endl << endl << "start ex3_40: " << endl;
@@ -47,6 +48,25 @@ int main() {
     }
     cout << endl;
 
+    clear_println("\n习题 ------ ex3.24 两类迭代器用法");
+    vector<int> vec(10, 1);
+    for (auto &item : vec) {
+        item *= 2;
+    }
+    for (const auto &item : vec) {
+        cout << item << " ";
+    }
+    for (auto it = vec.cbegin(); it != vec.cend(); it++) {
+        cout << *it << " ";
+    }
+
+    clear_println("\n习题 ------ ex3.24 两类迭代器用法");
+    char a1[] = {'c' , 'p', 'p'};
+    char a2[] = {'c' , 'p', 'p', '\0'};
+    cout << "size of : " << endl;
+    cout << sizeof a1 / sizeof(char) << endl;
+    cout << sizeof a2 / sizeof(char) << endl;
+
     // ex3_42
     vector<int> vc{0, 1, 2, 3, 4};
     int a[5];
@@ -69,7 +89,6 @@ int main() {
         cout << *pbeg << " " << endl;
         pbeg++;
     }
-
 
     // 多维数组的学习
     cout << endl << endl << "start ex3_43: " << endl;

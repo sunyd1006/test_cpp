@@ -68,6 +68,7 @@ void auto_free_use_connection(const string str) {
 
 
 // g14 ex12.cpp ex12main.cpp -o main && ./main
+// g11 ex12main.cpp -o main && ./main
 int main() {
     clear_println("\n章节 ------------------ 12 测试 static 变量");
     for (auto i = 0; i != 5; ++i) {
@@ -108,16 +109,20 @@ int main() {
     ex16.reset();
     // ex16.reset(nullptr);
 
-    clear_println("\n习题 ------ ex12.19 ");
+    clear_println("\n习题 ------ ex12.20 ");
     std::ifstream ifs("./data/book.txt");
+    // std::ifstream ifs("primer/data/book.txt");  // note: 用test_cpp的目录开始才可以
     StrBlob blob;
     for (std::string str; std::getline(ifs, str); )
         blob.push_back(str);
     for (StrBlobPtr pbeg(blob.begin()), pend(blob.end()); pbeg != pend; pbeg.incr())
         std::cout << pbeg.deref() << std::endl;
 
-    clear_println("\n习题 ------ ex12.19 ");
-
+    clear_println("\n习题 ------ ex12.22 ");
+    // const StrBlob const_blob(blob);
+    // for (StrBlobPtr pbeg(const_blob.begin()), pend(const_blob.end()); pbeg != pend; pbeg.incr())
+    //     std::cout << pbeg.deref() << std::endl;
+    
 
     clear_println("\n习题 ------ ex12.19 ");
 

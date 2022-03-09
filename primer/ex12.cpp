@@ -3,6 +3,7 @@
 //
 
 #include "ex12.h"
+#include "tool.h"
 
 using namespace std;
 
@@ -51,3 +52,12 @@ StrBlobPtr StrBlob::end() {
     return StrBlobPtr(*this, data->size());
 }
 
+// StrBlobPtr StrBlob::begin() const{
+//     print(string("call const ") + __func__);
+//     return StrBlobPtr(*this);
+// }
+//
+// StrBlobPtr StrBlob::end() const {
+//     print(string("call const ") + __func__);
+//     return StrBlobPtr(*this, data->size());
+// }

@@ -8,7 +8,8 @@
 using namespace  std;
 
 // g++ 编译2个文件，-c生成可执行main
-// g++ Sales_data.cpp ex7main.cpp -o main && ./main
+// g11 Sales_data.cpp ex7main.cpp -o main && ./main
+// g11 ex7main.cpp -o main && ./main
 int main() {
     cout << "\n case: ex7.word_transformation_bad.txt " << endl;
     Sales_data item("aaaa", 10, 10);

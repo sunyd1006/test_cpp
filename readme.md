@@ -445,3 +445,5 @@ bool operator<(const IsCheckedKeyTuple &a, const IsCheckedKeyTuple &b) {
     return false;
 }
 ```
+
+clion里键盘输入完毕使用cmd+d

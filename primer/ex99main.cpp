@@ -19,12 +19,8 @@ using namespace  std;
 
 // define current function
 
-
-// g11  ex99.cpp -o main && ./main
+// g11  ex99mian.cpp -o main && ./main
 int main() {
-
-
-
 
     // ----------------------------------------------
     // clear_println("\n习题 ------ ex10.36 ");

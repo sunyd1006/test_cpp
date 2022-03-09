@@ -7,10 +7,9 @@
 
 #include "ex6.h"
 
-using namespace  std;
+using namespace std;
 
 void printNone() {
-
 }
 
 // using arrTen = int[10];
@@ -29,7 +28,6 @@ void printUsingArr(int (&arr)[5], int *arr2, int arr2sz) {
     for (const auto &item : arr) {
         cout << item << " ";
     }
-
     // 数组循环，非得这样写真实的慢呀
     for (int i = 0; i < arr2sz; i++) {
         cout << *arr2++ << " ";
@@ -37,27 +35,29 @@ void printUsingArr(int (&arr)[5], int *arr2, int arr2sz) {
 }
 
 // void test(char & i);
-
 void vector_dynamic_param_list(initializer_list<string> list) {
     for (const auto &item : list) {
-        cout << item << " " ;
+        cout << item << " ";
     }
 }
 
 using Iter = vector<int>::const_iterator;
-void printVecByIter(Iter start, Iter end) {
-    #ifndef NDEBUG
-        cout << "NDEBUG: "<< endl;
-    #endif
 
-    cout <<  __func__ << ":";
+void printVecByIter(Iter start, Iter end) {
+#ifndef NDEBUG
+    cout << "NDEBUG: " << endl;
+#endif
+
+    cout << __func__ << ":";
     while (start != end) {
         cout << *start++ << " ";
     }
     cout << endl;
 }
 
-int get_size(int cinsz) {return cinsz;}
+int get_size(int cinsz) {
+    return cinsz;
+}
 
 int main() {
     cout << "\n case: 使用错误的引用参数 " << endl;
