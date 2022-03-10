@@ -62,8 +62,30 @@ int main() {
     std::cout << "local_int: " <<  local_int << std::endl;
 
     clear_println("\n习题 ------ ex2.42 ");
-    Sales_data item("aaaa", 10, 10);
-    item.printString();
+    string str_bo("aaaa");
+    Sales_data item(str_bo);
+
+    // g++ -std=c++14 ex2main.cpp -o main && ./main
+    // 下边这行可以调用成功
+    // item.printHaha_success_define();
+
+    // 下面这行调用不成功, 它的编译命令如下：
+    item.printHaha_failed_define();
+    /**
+     *  1. g++ -std=c++14  Sales_data.cpp ex2main.cpp -o main && ./main
+     *   报重定义错误：
+     *
+     *  2.  g++ -std=c++14 ex2main.cpp -o main  && ./main
+     *  Undefined symbols for architecture arm64:
+     *  Sales_data::printHaha_failed_define()", referenced from:
+              _main in ex2main-0a72e8.o
+        ld: symbol(s) not found for architecture arm64
+        clang: error: linker command failed with exit code 1 (use -v to see invocation)
+     */
+
+
+
+
 
     // ----------------------------------------------
     // clear_println("\n习题 ------ ex10.36 ");

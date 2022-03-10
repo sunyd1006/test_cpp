@@ -1,8 +1,8 @@
 //
 // Created by sun yin dong on 2021/9/17.
 //
-#ifndef Sales_data_H
-#define Sales_data_H
+#ifndef TEST_CPP_SALES_DATA_H
+#define TEST_CPP_SALES_DATA_H
 
 #include <iostream>
 #include <string>
@@ -10,8 +10,7 @@
 // syd include common util
 #include "tool.h"
 
-// 第7章 p230
-class Sales_data {
+class Sales_data { // 第7章 p230
     // 不用 friend 这里是无法访问私有数据成员的。有了friend 相当于不用get/set方法了
     friend Sales_data add(const Sales_data&, const Sales_data&);
     friend std::ostream &print(std::ostream& out, const Sales_data& item);
@@ -19,12 +18,18 @@ class Sales_data {
 public:
     Sales_data() = default;
     Sales_data(std::istream &is);
-    Sales_data(std::string book): bookNo(book) { };
-    Sales_data(std::string book, unsigned sold, double reve)
+    Sales_data(std::string& book): bookNo(book) { };
+    Sales_data(std::string& book, unsigned sold, double reve)
         :bookNo(book), units_sold(sold), revenue(reve) { }
     double getAvgPrice() const;
     Sales_data& combine(const Sales_data&);
     void printString();
+
+    void printHaha_success_define() {
+        std::cout << "hah " << std::endl;
+    }
+    void printHaha_failed_define();
+
     std::string getIsbn() const { return bookNo; } // implicit inline
     unsigned getUnitsSold() const { return units_sold; }
     double getRevenue() const { return revenue; }
@@ -61,4 +66,4 @@ std::istream &read(std::istream& in, Sales_data& item);
 // }
 
 // 第二章
-#endif // Sales_data_H
+#endif // TEST_CPP_SALES_DATA_H

@@ -1,3 +1,4 @@
+
 #include "Sales_data.h"
 
 // static 部分
@@ -28,6 +29,10 @@ Sales_data &Sales_data::combine(const Sales_data &item) {
 
 void Sales_data::printString() {
     std::cout << " bookNo: " << bookNo << " units_sold: " << units_sold << " revenue: " << revenue << std::endl;
+}
+
+void Sales_data::printHaha_failed_define() {
+    std::cout << "hah " << std::endl;
 }
 
 // 有元函数
