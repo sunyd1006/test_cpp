@@ -102,12 +102,6 @@ bool equalsOp(const ItemKey& left, const ItemKey& right) {
 
 
 
-
-
-
-
-
-
 // -----------------------------------
 class Person {
 public:
@@ -143,10 +137,18 @@ public:
     }
 };
 
+// define some variables
+std::vector<int> test_int_vec;
+std::vector<std::string> test_string_vec;
+std::list<int> test_int_list;
 
+std::vector<int> int_vec{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+std::vector<int> int_du_vec{0, 1, 2, 3, 4, 5, 5, 5, 5, 5};
+std::vector<std::string> str_vec{
+        "the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"
+};
 
-
-// g14  ex11main.cpp -o main && ./main
+// g14 Sales_data.cpp ex11main.cpp -o main && ./main
 int main() {
     clear_println("\n习题 ------ ex11.3 ");
     ifstream filein("./data/test_file.txt");

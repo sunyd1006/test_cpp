@@ -90,16 +90,18 @@ int main() {
 
     std::cout << "\n习题 ------ 9.18 " << std::endl;
     deque<string> input;
+    cout << "input str to vector(end with eof): ";
     for (string str; cin >> str; input.push_back(str)) {
-        if (str == "e") break;
+        if (str == "eof") break;
     }
     for (auto iter = input.cbegin(); iter != input.cend(); ++iter)
         cout << *iter << endl;
 
     std::cout << "\n习题 ------ 9.19 " << std::endl;
     list<string> inputLi;
+    cout << "input str to vector(end with eof): ";
     for (string str; cin >> str; inputLi.push_back(str))
-        if (str == "e") break;
+        if (str == "eof") break;
     for (auto iter = inputLi.cbegin(); iter != inputLi.cend(); ++iter)
         cout << *iter << endl;
 
@@ -187,8 +189,9 @@ int main() {
 
     std::cout << "\n习题 ------ 9.38 vec_who_to_resize" << std::endl;
     std::vector<std::string> vec_who_to_resize;
+    cout << "input str to vector(end with eof): ";
     for (std::string buffer; std::cin >> buffer; vec_who_to_resize.push_back(buffer)) {
-        if (buffer == "e") break;
+        if (buffer == "eof") break;
         std::cout << " cur capacity: " << vec_who_to_resize.capacity() << " size: " << vec_who_to_resize.size() << std::endl;
     }
 

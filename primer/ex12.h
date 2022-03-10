@@ -19,7 +19,6 @@ class StrBlobPtr;  // 先声明一下，不然后面找不到
 // 多人共享底层的数据结构 vector<string> ，并互相可见更改
 class StrBlob {
     friend class StrBlobPtr;
-
 public:
     typedef std::vector<std::string>::size_type size_type;
 
@@ -40,10 +39,12 @@ public:
     std::string &back() const;
 
     StrBlobPtr begin();// todo 注意这个伴随类
+
     StrBlobPtr end();
 
-    // StrBlobPtr begin() const;// note: const重载类
-    // StrBlobPtr end() const;
+    StrBlobPtr begin() const;// note: const重载类
+
+    StrBlobPtr end() const;
 
 private:
     void check(size_type i, const std::string &msg) const;
@@ -71,7 +72,7 @@ public:
     StrBlobPtr(StrBlob& _wptr, size_type _curr = 0) : wptr(_wptr.data), curr(_curr) {};
 
     // note: for 12.22 StrBlobPtr 支持 const StrBlob
-    // StrBlobPtr(const StrBlob& _wptr, size_type _curr = 0) : wptr(_wptr.data), curr(_curr) {};
+    StrBlobPtr(const StrBlob& _wptr, size_type _curr = 0) : wptr(_wptr.data), curr(_curr) {};
 
     string &deref() const {
         auto sp = check(curr, "out of bound");

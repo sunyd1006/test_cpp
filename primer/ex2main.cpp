@@ -5,7 +5,6 @@
 #include <stdexcept>
 
 // current file include
-
 #include "Sales_data.h"
 #include "tool.h"
 
@@ -34,7 +33,6 @@ std::string global_str;
 int global_int;
 
 // g14 Sales_data.cpp ex2main.cpp -o main && ./main
-// g14 ex2main.cpp -o main && ./main
 int main() {
     clear_println("\n习题 ------ ex2.1 ");
     vector<int> v1;
@@ -62,7 +60,9 @@ int main() {
     std::cout << "local_int: " <<  local_int << std::endl;
 
     clear_println("\n习题 ------ ex2.42 ");
-    Sales_data item("aaaa", 10, 10);
+    string str_bo("aaaa");
+    Sales_data item(str_bo);
+    // item.printHello();
     item.printString();
 
     // ----------------------------------------------

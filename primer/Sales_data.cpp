@@ -1,3 +1,4 @@
+
 #include "Sales_data.h"
 
 // static 部分

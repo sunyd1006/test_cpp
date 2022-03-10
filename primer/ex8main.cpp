@@ -19,6 +19,7 @@ class testClassName {
 
 std::istream& func8_1(std::istream &is) {
     string buf;
+    cout << "please input str , input end will break";
     while (is >> buf) {
         if (buf == "end") break;
         std::cout << buf << std::endl;

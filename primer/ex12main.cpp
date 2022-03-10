@@ -67,8 +67,7 @@ void auto_free_use_connection(const string str) {
 }
 
 
-// g14 ex12.cpp ex12main.cpp -o main && ./main
-// g11 ex12main.cpp -o main && ./main
+// g14 Sales_data.cpp ex12.cpp ex12main.cpp -o main && ./main
 int main() {
     clear_println("\n章节 ------------------ 12 测试 static 变量");
     for (auto i = 0; i != 5; ++i) {
@@ -98,20 +97,22 @@ int main() {
 
     clear_println("\n习题 ------ ex12.16 ");
     unique_ptr<string> ex16(new string("unique_ptr_value"));
-    // unique_ptr<string> p2(ex16); // copy
+    /**
+    //  unique_ptr<string> p2(ex16); // copy
     //                      ^
     // Error: Call to implicitly-deleted copy constructor of 'unique_ptr<string>'
     //
     // unique_ptr<string> p3 = ex16; // assign
     //                      ^
     // Error: Call to implicitly-deleted copy constructor of 'unique_ptr<string>'
+     */
     std::cout << *ex16 << std::endl;
     ex16.reset();
     // ex16.reset(nullptr);
 
     clear_println("\n习题 ------ ex12.20 ");
     std::ifstream ifs("./data/book.txt");
-    // std::ifstream ifs("primer/data/book.txt");  // note: 用test_cpp的目录开始才可以
+    // std::ifstream ifs("primer/data/book.txt");  // note: vscode 里面要用这个目录
     StrBlob blob;
     for (std::string str; std::getline(ifs, str); )
         blob.push_back(str);
@@ -119,10 +120,10 @@ int main() {
         std::cout << pbeg.deref() << std::endl;
 
     clear_println("\n习题 ------ ex12.22 ");
-    // const StrBlob const_blob(blob);
-    // for (StrBlobPtr pbeg(const_blob.begin()), pend(const_blob.end()); pbeg != pend; pbeg.incr())
-    //     std::cout << pbeg.deref() << std::endl;
-    
+    const StrBlob const_blob(blob);
+    for (StrBlobPtr pbeg(const_blob.begin()), pend(const_blob.end()); pbeg != pend; pbeg.incr())
+        std::cout << pbeg.deref() << std::endl;
+
 
     clear_println("\n习题 ------ ex12.19 ");
 

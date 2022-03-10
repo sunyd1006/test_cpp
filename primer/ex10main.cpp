@@ -68,6 +68,18 @@ bool check_size(std::string word, std::size_t sz) {
     return word.size() <= sz;
 }
 
+
+// define some variables
+std::vector<int> test_int_vec;
+std::vector<std::string> test_string_vec;
+std::list<int> test_int_list;
+
+std::vector<int> int_vec{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+std::vector<int> int_du_vec{0, 1, 2, 3, 4, 5, 5, 5, 5, 5};
+std::vector<std::string> str_vec{
+        "the", "quick", "red", "fox", "jumps", "over", "the", "slow", "red", "turtle"
+};
+
 // define some functions
 // g11 ex10main.cpp -o main && ./main
 // 会报重复编译错误：g11 ex10main.cpp -o main && ./main
@@ -205,7 +217,8 @@ int main() {
     vector<int> test_int_vec;
     test_int_vec = duplicate_vec;
     print("现有元素为");
-    for_each(unique(test_int_vec.begin(), test_int_vec.end()), test_int_vec.end(), print_int_lambda );
+    auto print_int_lambda = [](const int i) { std::cout << i << " "; };
+    for_each(unique(test_int_vec.begin(), test_int_vec.end()), test_int_vec.end(), print_int_lambda);
 
     println("\n习题 ------ ex10.27 ");
     test_int_vec.clear();
@@ -231,6 +244,7 @@ int main() {
     println(test_string_vec);
 
     clear_println("\n习题 ------ ex10.30 输入eof");
+    cout << "input str to vector(end with eof): ";
     istream_iterator<string> cin_in(cin), eof_int;
     ofstream file_out("data/test_file_out.txt");
     ostream_iterator<string> file_out_it(file_out, " ");    // 每个输入后面跟一个分隔符 " "
