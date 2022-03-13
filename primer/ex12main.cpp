@@ -14,7 +14,7 @@
 #include <sstream>
 #include <fstream>
 
-using namespace  std;
+using namespace std;
 
 // define current function
 size_t static_count_func() {
@@ -26,7 +26,9 @@ size_t static_count_func() {
 auto get_dynamic_vec() {
     return new vector<int>();
 }
-using dynamicVecPtr = vector<int>*;
+
+using dynamicVecPtr = vector<int> *;
+
 auto init_dynamic_vec(dynamicVecPtr ptr) {
     // for (int tmp; cin >> tmp; ptr->push_back(tmp));
     for (int i = 0; i < 5; ++i) {
@@ -37,9 +39,11 @@ auto init_dynamic_vec(dynamicVecPtr ptr) {
 
 // ex12.7
 using dynamicVecSPtr = shared_ptr<vector<int>>;
+
 auto get_dynamic_sp_vec() {
     return make_shared<vector<int>>();
 }
+
 auto init_dynamic_vec(dynamicVecSPtr ptr) {
     for (int i = 0; i < 6; ++i) {
         ptr->push_back(i);
@@ -50,14 +54,16 @@ auto init_dynamic_vec(dynamicVecSPtr ptr) {
 // ex12.14
 struct SunConnection {
     string name;
+
     SunConnection();
-    SunConnection(string _name): name(_name) {};
+
+    SunConnection(string _name) : name(_name) {};
 };
 
 void auto_free_use_connection(const string str) {
     SunConnection conn(str);
     println("正在使用: " + conn.name);
-    auto deleteMethod = [] (const SunConnection* ptr) {
+    auto deleteMethod = [](const SunConnection *ptr) {
         println("Delete " + (ptr->name) + " now.");
         // delete ptr;   // todo 此处模拟是应该用于关闭资源，而为何会报错呢?
     };
@@ -76,8 +82,8 @@ int main() {
     println();
 
     clear_println("\n习题 ------ ex12.2 ");
-    const StrBlob csb{ "hello", "world", "pezy" };
-    StrBlob sb{ "hello", "world", "pezy" };
+    const StrBlob csb{"hello", "world", "pezy"};
+    StrBlob sb{"hello", "world", "pezy"};
 
     std::cout << csb.front() << " " << csb.back() << std::endl;
     sb.back() = "Mooophy";
@@ -114,7 +120,7 @@ int main() {
     std::ifstream ifs("./data/book.txt");
     // std::ifstream ifs("primer/data/book.txt");  // note: vscode 里面要用这个目录
     StrBlob blob;
-    for (std::string str; std::getline(ifs, str); )
+    for (std::string str; std::getline(ifs, str);)
         blob.push_back(str);
     for (StrBlobPtr pbeg(blob.begin()), pend(blob.end()); pbeg != pend; pbeg.incr())
         std::cout << pbeg.deref() << std::endl;
@@ -125,13 +131,48 @@ int main() {
         std::cout << pbeg.deref() << std::endl;
 
 
-    clear_println("\n习题 ------ ex12.19 ");
+    clear_println("\n习题 ------ ex12.23 ");
+    char *concatenate_string = new char[strlen("hello world") + 1]();
+    strcat(concatenate_string, "hello ");
+    strcat(concatenate_string, "world");
+    std::cout << concatenate_string << std::endl;
+    delete[] concatenate_string;
 
+    std::string str1{"hello "}, str2{"world"};
+    std::cout << str1 + str2 << std::endl;
 
-    clear_println("\n习题 ------ ex12.19 ");
+    clear_println("\n习题 ------ ex12.24 ");
+    std::cout << "How long do you want the string? default with 10" << endl;
+    // int size{10};
+    // char *input = new char[size + 1]();
+    // std::cin.ignore();
+    // std::cin.get(input, size + 1);
+    // std::cout << input;
+    // delete[] input;
 
+    clear_println("\n习题 ------ ex12.26 ");
+    // std::allocator<std::string> alloc;
+    // const int DYNAMIC_ARRAY_SIZE = 2;
+    // auto const start = alloc.allocate(DYNAMIC_ARRAY_SIZE);
+    // std::string s;
+    // auto next_start = start;
+    // std::cout << "input " << DYNAMIC_ARRAY_SIZE << " str：";
+    // while (next_start != start + DYNAMIC_ARRAY_SIZE && std::cin >> s)
+    //     alloc.construct(next_start++, s);
+    //
+    // while (next_start != start) {
+    //     std::cout << *--next_start << " ";
+    //     alloc.destroy(next_start);
+    // }
+    // alloc.deallocate(start, DYNAMIC_ARRAY_SIZE);
 
-    clear_println("\n习题 ------ ex12.19 ");
+    clear_println("\n习题 ------ ex12.27 ");
+    QueryText query27("data/storyDataFile.txt"); // 命令行请用这个
+    auto ret27 = query27.find("thing");
+    ret27.printResult();
+
+    query27.find("sunyd").printResult();
+
 
 
     // ----------------------------------------------

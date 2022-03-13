@@ -2,23 +2,19 @@
 ######################################################################
 # 使用说明：直接在CLion中执行，即可先打印日志
 ######################################################################
+
 current_floder_name=$(cd $(dirname $0); pwd)      # dirname $0 : 获取目录名
 log_name=sunhu_compile_1005_xx873894873847384.log
 main_name="main"
+abs_log_name=$current_floder_name"/"$log_name
+abs_main_name=$current_floder_name"/"$main_name
 
 # :note 配置编辑文件命令
-abs_compile1=$current_floder_name"/ex2main.cpp"
-#abs_compile2=$current_floder_name"/Sales_data.cpp"
-
-#abs_compile1=$current_floder_name"/ex12main.cpp"
-#abs_compile2=$current_floder_name"/ex12.cpp"
+all_relative_compile_file_name="tool.cpp Sales_data.cpp ex12.cpp ex12main.cpp";
 
 #cpp_version="11"
 cpp_version="14"
 #cpp_version="17"
-
-abs_log_name=$current_floder_name"/"$log_name
-abs_main_name=$current_floder_name"/"$main_name
 
 function read_file() {
   while IFS= read -r line;
@@ -34,15 +30,17 @@ function read_file() {
   done < $1
 }
 
-# :note 配置编辑命令
-if [ $abs_compile2 ] ; then
-  run_compile_param1=$(g++ -std=c++$cpp_version $abs_compile1 $abs_compile2 -o $abs_main_name 2>$abs_log_name)
-else
-  run_compile_param2=$(g++ -std=c++$cpp_version $abs_compile1 -o $abs_main_name 2>$abs_log_name)
-fi
+run_compile_param1=$(cd $current_floder_name && g++ -std=c++$cpp_version $all_relative_compile_file_name -o $main_name -g 2>$log_name)
 
-# 判断文件是否存在
+# :note 配置编辑命令
+#if [ $abs_compile2 ] ; then
+#  run_compile_param1=$(g++ -std=c++$cpp_version $abs_compile1 $abs_compile2 -o $abs_main_name 2>$abs_log_name)
+#else
+#  run_compile_param2=$(g++ -std=c++$cpp_version $abs_compile1 -o $abs_main_name 2>$abs_log_name)
+#fi
+
 if [ ! -f $abs_log_name ] ; then
+    # 判断文件是否存在
     echo "------------------------------------------- 不存在$log_name"
     exit
 else
@@ -67,9 +65,10 @@ else
         # 调用可执行文件
         $abs_main_name
     fi
+
+    rm_file=$(rm -rf $abs_log_name)
 fi
 
-rm_file=$(rm -rf $abs_log_name)
 
 
 # 计算日志的 md5

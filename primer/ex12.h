@@ -6,19 +6,25 @@
 #define TEST_CPP_EX12_H
 
 #include <iostream>
-#include <string>
+#include <fstream>
+#include <sstream>
+
 #include <memory>
+#include <string>
+
 #include <vector>
+#include <set>
+
+#include "tool.h"
 
 // using std::vector, std::string;  // cpp 17语法
-using std::vector;
-using std::string;
 
 class StrBlobPtr;  // 先声明一下，不然后面找不到
 
 // 多人共享底层的数据结构 vector<string> ，并互相可见更改
 class StrBlob {
     friend class StrBlobPtr;
+
 public:
     typedef std::vector<std::string>::size_type size_type;
 
@@ -54,7 +60,7 @@ private:
 
 // 不影响 StrBlob的生存周期，但组织用户访问不存在的StrBlob
 class StrBlobPtr {
-    typedef vector<string>::size_type size_type;
+    typedef std::vector<std::string>::size_type size_type;
 private:
     auto check(size_type _curr, const std::string &msg) const {
         auto sptr = wptr.lock();
@@ -64,17 +70,18 @@ private:
         }
         return sptr;
     }
-    std::weak_ptr<vector<string >> wptr;
+
+    std::weak_ptr<std::vector<std::string >> wptr;
     size_type curr;
 public:
     StrBlobPtr() : curr(0) {};
 
-    StrBlobPtr(StrBlob& _wptr, size_type _curr = 0) : wptr(_wptr.data), curr(_curr) {};
+    StrBlobPtr(StrBlob &_wptr, size_type _curr = 0) : wptr(_wptr.data), curr(_curr) {};
 
     // note: for 12.22 StrBlobPtr 支持 const StrBlob
-    StrBlobPtr(const StrBlob& _wptr, size_type _curr = 0) : wptr(_wptr.data), curr(_curr) {};
+    StrBlobPtr(const StrBlob &_wptr, size_type _curr = 0) : wptr(_wptr.data), curr(_curr) {};
 
-    string &deref() const {
+    std::string &deref() const {
         auto sp = check(curr, "out of bound");
         return (*sp)[curr];
     }
@@ -89,5 +96,78 @@ public:
         return p.curr != curr;
     }
 };
+
+
+class QueryResult {
+    using LineNo = std::vector<std::string>::size_type;
+    using DataVec = std::vector<std::string>;
+public:
+    QueryResult() = delete;
+
+    QueryResult(std::shared_ptr<DataVec> _data, std::pair<std::string, std::set<LineNo>>_ref) : data(_data), ref(_ref) { };
+
+    void printResult() {
+        println(ref.first + " occurs " + std::to_string( ref.second.size()) + std::string("  times"));
+        for (const auto &item : ref.second) {
+            print(std::string("   (line ") + std::to_string(item + 1) + "\t) " + (*data)[item]);
+            println();
+        }
+    }
+
+private:
+    std::shared_ptr<DataVec> data;
+    std::pair<std::string, std::set<LineNo>> ref;
+};
+
+class QueryResult;
+class QueryText {
+    using LineNo = std::vector<std::string>::size_type;
+    using DataVec = std::vector<std::string>;
+    friend class QueryResult;
+public:
+    QueryText() = default;
+
+    QueryText(std::string file_name) : data(new DataVec()) {
+        std::fstream in(file_name.c_str());
+        int index = 0;
+        for (std::string line; std::getline(in, line); ++index) {
+            data->push_back(line);
+            std::istringstream line_stream(line);
+            std::string word_raw, word;
+            while (line_stream >> word_raw) {
+                std::remove_copy_if(word_raw.begin(), word_raw.end(), std::back_inserter(word), ispunct);
+                auto &ret = nameIndex[word];
+                // if (!ret) ret.reset(new std::set<LineNo>());
+                ret.insert(index);
+                word.clear();
+            }
+        }
+    }
+
+    QueryResult find(std::string word) {
+        static std::set<LineNo > empty_index;
+        auto ret = nameIndex.find(word);
+        if (ret == nameIndex.end()) {
+            return QueryResult(data, {word, empty_index});
+        }
+        return QueryResult(data, {word, ret->second});
+    }
+
+    void printNameIndex() {
+        std::cout << "size is : " << nameIndex.size() << " ";
+        for (const auto &item : nameIndex) {
+            std::cout << "word: " << item.first << "\t[";
+            for (const auto &second : item.second) {
+                std::cout << "  " << second;
+            }
+            std::cout << "\t]" << std::endl;
+        }
+    }
+
+private:
+    std::shared_ptr<std::vector<std::string>> data;
+    std::map<std::string, std::set<LineNo>> nameIndex;
+};
+
 
 #endif //TEST_CPP_EX12_H

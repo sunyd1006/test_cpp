@@ -29,7 +29,7 @@ inline void lnprintln(const char *dis) {
 }
 
 inline void print(std::string str) {
-    std::cout << str << " : ";
+    std::cout << str << " ";
 }
 
 using Map = std::map<std::string, std::size_t>;
