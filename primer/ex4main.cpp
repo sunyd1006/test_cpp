@@ -12,7 +12,7 @@
 using namespace  std;
 
 int main() {
-    clear_println("\n习题 ------ ex4.1 ");
+    lnPrintln("\n习题 ------ ex4.1 ");
     cout << (5 + 10 * 20/2) << endl;
     cout << endl << "================= tmp ============" << endl;
     vector<int> vec(5);

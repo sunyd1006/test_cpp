@@ -235,7 +235,7 @@ int main() {
     println(re3);
     println(re4);
 
-    clear_println("\n习题 ------ ex10.29 ");
+    lnPrintln("\n习题 ------ ex10.29 ");
     ifstream file_in("data/test_file.txt"); // todo fstream
     istream_iterator<string> file_it(file_in), eof;
     while (file_it != eof) {
@@ -243,7 +243,7 @@ int main() {
     }
     println(test_string_vec);
 
-    clear_println("\n习题 ------ ex10.30 输入eof");
+    lnPrintln("\n习题 ------ ex10.30 输入eof");
     cout << "input str to vector(end with eof): ";
     istream_iterator<string> cin_in(cin), eof_int;
     ofstream file_out("data/test_file_out.txt");
@@ -253,36 +253,36 @@ int main() {
         *file_out_it++ = *cin_in++;
     }
 
-    clear_println("\n习题 ------ ex10.30 官方写法 不会消除注释代码没问题");
+    lnPrintln("\n习题 ------ ex10.30 官方写法 不会消除注释代码没问题");
     // std::vector<int> cin_vec((std::istream_iterator<int>(std::cin)), std::istream_iterator<int>());
     // std::sort(cin_vec.begin(), cin_vec.end());
     // std::copy(cin_vec.cbegin(), cin_vec.cend(), std::ostream_iterator<int>(std::cout, " "));
 
-    clear_println("\n习题 ------ ex10.31 官方写法");
+    lnPrintln("\n习题 ------ ex10.31 官方写法");
     // std::vector<int> cin_unique_copy_vec((std::istream_iterator<int>(std::cin)), std::istream_iterator<int>());
     // std::sort(cin_unique_copy_vec.begin(), cin_unique_copy_vec.end());
     // std::unique_copy(cin_unique_copy_vec.cbegin(), cin_unique_copy_vec.cend(), std::ostream_iterator<int>(std::cout, " "));
 
-    clear_println("\n习题 ------ ex10.34 ");
+    lnPrintln("\n习题 ------ ex10.34 ");
     for (auto it = str_vec.rbegin(); it != str_vec.rend(); it++) {
         print(*it);
     }
 
-    clear_println("\n习题 ------ ex10.35 ");
+    lnPrintln("\n习题 ------ ex10.35 ");
     println(str_vec);
     for (auto it = std::prev(str_vec.cend()); true; --it) {
         std::cout << *it << " ";
         if (it == str_vec.cbegin()) break;
     }
 
-    clear_println("\n习题 ------ ex10.36 ");
+    lnPrintln("\n习题 ------ ex10.36 ");
     auto ret36 = find(int_vec.rbegin(), int_vec.rend(), 0);
     std::cout << std::distance(ret36, int_vec.rend()) << std::endl;
     std::list<int> lst = { 1, 2, 3, 4, 0, 5, 6 };
     auto found_0 = std::find(lst.crbegin(), lst.crend(), 0);
     std::cout << std::distance(found_0, lst.crend()) << std::endl;
 
-    clear_println("\n习题 ------ ex10.37 ");
+    lnPrintln("\n习题 ------ ex10.37 ");
     reverse_copy(int_vec.begin() + 2, int_vec.begin() + 8, back_inserter(test_int_list));
     println(test_int_list);
 

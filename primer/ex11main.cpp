@@ -101,7 +101,6 @@ bool equalsOp(const ItemKey& left, const ItemKey& right) {
 }
 
 
-
 // -----------------------------------
 class Person {
 public:
@@ -150,7 +149,7 @@ std::vector<std::string> str_vec{
 
 // g14 Sales_data.cpp ex11main.cpp -o main && ./main
 int main() {
-    clear_println("\n习题 ------ ex11.3 ");
+    lnPrintln("\n习题 ------ ex11.3 ");
     ifstream filein("./data/test_file.txt");
     istream_iterator<string> file_it(filein), file_eof;
     set<string> exclude = {"is", "a"};
@@ -165,7 +164,7 @@ int main() {
         std::cout << item.first << " -> " << item.second << "   ";
     }
 
-    clear_println("\n习题 ------ ex11.9 ");
+    lnPrintln("\n习题 ------ ex11.9 ");
     // ex 11.9
     std::map<std::string, std::list<std::size_t>> m;
 
@@ -182,11 +181,11 @@ int main() {
     // std::list<int> li;
     // ml.insert(std::pair<std::list<int>::iterator, int>(li.begin(), 0));
 
-    clear_println("\n习题 ------ ex11.11 ");
+    lnPrintln("\n习题 ------ ex11.11 ");
     using Less = bool (*)(Sales_data const&, Sales_data const&);
     std::multiset<Sales_data, Less> bookstore(Less);
 
-    clear_println("\n习题 ------ ex11.13 pair插入方式");
+    lnPrintln("\n习题 ------ ex11.13 pair插入方式");
     vector<pair<string, int>> test_pair_vec;
     test_pair_vec.push_back(make_pair("sun", 1));
     test_pair_vec.push_back(std::make_pair("ying", 2));
@@ -197,7 +196,7 @@ int main() {
     }
     println();
 
-    clear_println("\n习题 ------ ex11.17");
+    lnPrintln("\n习题 ------ ex11.17");
     test_string_vec.push_back("test_string_vec");
     multiset<string> str_multiset{"mutiset", "mutiset"};
     copy(test_string_vec.begin(), test_string_vec.end(), inserter(str_multiset, str_multiset.end())); // legal
@@ -216,7 +215,7 @@ int main() {
     println(str_multiset);
 
 
-    clear_println("\n习题 ------ ex11.23 ");
+    lnPrintln("\n习题 ------ ex11.23 ");
     istringstream iStr("sun hao hu wenrui sun yindong");
     string fname, lname;
     map<string, vector<string>> count_map;
@@ -233,13 +232,13 @@ int main() {
         std::cout << item.first << " -> " << item.second << "   ";
     }
 
-    clear_println("\n习题 ------ ex11.26 ");
+    lnPrintln("\n习题 ------ ex11.26 ");
     std::map<int, std::string> ex26 = { { 1,"ss" },{ 2,"sz" } };
     using KeyType = std::map<int, std::string>::key_type;
     std::cout << "type to subscript: " << typeid(KeyType).name() << std::endl;
     std::cout << "returned from the subscript operator: " << typeid(decltype(ex26[1])).name() << std::endl;
 
-    clear_println("\n习题 ------ ex11.31 ");
+    lnPrintln("\n习题 ------ ex11.31 ");
     multimap<string, string> ex31map{{"sun", "book1"}, {"sun", "book2"}, {"sun", "book3"}, {"hu", "book1"}};
     string deleteName("sun");
     ex31map.erase(deleteName);
@@ -267,12 +266,12 @@ int main() {
         std::cout << item.first << " -> " << item.second << "   ";
     }
 
-    clear_println("\n习题 ------ ex11.31 ");
+    lnPrintln("\n习题 ------ ex11.31 ");
     ifstream ifs_map("./data/word_transformation_bad.txt"), ifs_content("./data/given_to_transform.txt");
     if (ifs_map && ifs_content) word_transform(ifs_map, ifs_content);
     else std::cerr << "can't find the documents." << std::endl;
 
-    clear_println("\n习题 ------ ex11.32 ItemKey作为key，要自定义hash和comp函数 ");
+    lnPrintln("\n习题 ------ ex11.32 ItemKey作为key，要自定义hash和comp函数 ");
     map<ItemKey, string, decltype(compareItemKey) *> ex32mapNotDefinedInClass(compareItemKey);
     ex32mapNotDefinedInClass.insert({ItemKey("sun", 1), "sun"});
     ex32mapNotDefinedInClass.insert({ItemKey("hu", 1), "hu"});
@@ -305,11 +304,11 @@ int main() {
     un_ne_ex32set.insert(sun);
     un_ne_ex32set.insert(hu);
 
-    lnprintln("打印 un_ne_ex32map");
+    lnPrintln("打印 un_ne_ex32map");
     for (const auto &item : ex32mapNotDefinedInClass) {
         std::cout << "item: " << item.first << " id: " << item.second << " ";
     }
-    lnprintln("打印 un_ne_ex32set");
+    lnPrintln("打印 un_ne_ex32set");
     println(un_ne_ex32set);
 
     // B2 使用了类外less定义, 用于unorder的map或者set声明
@@ -319,11 +318,11 @@ int main() {
     un_wai_ex32map[hu] = tmpStr;
     un_wai_ex32set.insert(sun);
     un_wai_ex32set.insert(hu);
-    lnprintln("打印 un_wai_ex32map");
+    lnPrintln("打印 un_wai_ex32map");
     for (const auto &item : ex32mapNotDefinedInClass) {
         std::cout << "item: " << item.first << " id: " << item.second << " ";
     }
-    lnprintln("打印 un_ne_ex32set");
+    lnPrintln("打印 un_ne_ex32set");
     println(un_ne_ex32set);
 
     //使用自定义的 hash_fun 哈希函数，比较规则仍选择默认的 equal_to<key>,前提是必须重载 == 运算符
@@ -362,19 +361,10 @@ int main() {
     // }
 
     // ----------------------------------------------
-    // clear_println("\n习题 ------ ex10.36 ");
-    // clear_println("\n章节 ------------------ 10.word_transformation_bad.txt");
+    // lnPrintln("\n习题 ------ ex10.36 ");
+    // lnPrintln("\n章节 ------------------ 10.word_transformation_bad.txt");
 
     return 0;
-
-
-
-
-
-
-
-
-
 
 
 

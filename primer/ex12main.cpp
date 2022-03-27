@@ -73,15 +73,15 @@ void auto_free_use_connection(const string str) {
 }
 
 
-// g14 Sales_data.cpp ex12.cpp ex12main.cpp -o main && ./main
+// g14 tool.cpp Sales_data.cpp ex12.cpp ex12main.cpp -o main && ./main
 int main() {
-    clear_println("\n章节 ------------------ 12 测试 static 变量");
+    lnPrintln("\n章节 ------------------ 12 测试 static 变量");
     for (auto i = 0; i != 5; ++i) {
         cout << static_count_func() << " ";
     }
     println();
 
-    clear_println("\n习题 ------ ex12.2 ");
+    lnPrintln("\n习题 ------ ex12.2 ");
     const StrBlob csb{"hello", "world", "pezy"};
     StrBlob sb{"hello", "world", "pezy"};
 
@@ -89,19 +89,19 @@ int main() {
     sb.back() = "Mooophy";
     std::cout << sb.front() << " " << sb.back() << std::endl;
 
-    clear_println("\n习题 ------ ex12.6 ");
+    lnPrintln("\n习题 ------ ex12.6 ");
     auto ex126 = init_dynamic_vec(get_dynamic_vec());
     println(*ex126);
     delete ex126;
 
-    clear_println("\n习题 ------ ex12.7 ");
+    lnPrintln("\n习题 ------ ex12.7 ");
     auto ex127 = init_dynamic_vec(get_dynamic_sp_vec());
     println(*ex127);
 
-    clear_println("\n习题 ------ ex12.14 ");
+    lnPrintln("\n习题 ------ ex12.14 ");
     auto_free_use_connection(string("CONNECTION"));
 
-    clear_println("\n习题 ------ ex12.16 ");
+    lnPrintln("\n习题 ------ ex12.16 ");
     unique_ptr<string> ex16(new string("unique_ptr_value"));
     /**
     //  unique_ptr<string> p2(ex16); // copy
@@ -116,7 +116,7 @@ int main() {
     ex16.reset();
     // ex16.reset(nullptr);
 
-    clear_println("\n习题 ------ ex12.20 ");
+    lnPrintln("\n习题 ------ ex12.20 ");
     std::ifstream ifs("./data/book.txt");
     // std::ifstream ifs("primer/data/book.txt");  // note: vscode 里面要用这个目录
     StrBlob blob;
@@ -125,13 +125,13 @@ int main() {
     for (StrBlobPtr pbeg(blob.begin()), pend(blob.end()); pbeg != pend; pbeg.incr())
         std::cout << pbeg.deref() << std::endl;
 
-    clear_println("\n习题 ------ ex12.22 ");
+    lnPrintln("\n习题 ------ ex12.22 ");
     const StrBlob const_blob(blob);
     for (StrBlobPtr pbeg(const_blob.begin()), pend(const_blob.end()); pbeg != pend; pbeg.incr())
         std::cout << pbeg.deref() << std::endl;
 
 
-    clear_println("\n习题 ------ ex12.23 ");
+    lnPrintln("\n习题 ------ ex12.23 ");
     char *concatenate_string = new char[strlen("hello world") + 1]();
     strcat(concatenate_string, "hello ");
     strcat(concatenate_string, "world");
@@ -141,7 +141,7 @@ int main() {
     std::string str1{"hello "}, str2{"world"};
     std::cout << str1 + str2 << std::endl;
 
-    clear_println("\n习题 ------ ex12.24 ");
+    lnPrintln("\n习题 ------ ex12.24 ");
     std::cout << "How long do you want the string? default with 10" << endl;
     // int size{10};
     // char *input = new char[size + 1]();
@@ -150,34 +150,39 @@ int main() {
     // std::cout << input;
     // delete[] input;
 
-    clear_println("\n习题 ------ ex12.26 ");
-    // std::allocator<std::string> alloc;
-    // const int DYNAMIC_ARRAY_SIZE = 2;
-    // auto const start = alloc.allocate(DYNAMIC_ARRAY_SIZE);
-    // std::string s;
-    // auto next_start = start;
-    // std::cout << "input " << DYNAMIC_ARRAY_SIZE << " str：";
-    // while (next_start != start + DYNAMIC_ARRAY_SIZE && std::cin >> s)
-    //     alloc.construct(next_start++, s);
-    //
-    // while (next_start != start) {
-    //     std::cout << *--next_start << " ";
-    //     alloc.destroy(next_start);
-    // }
-    // alloc.deallocate(start, DYNAMIC_ARRAY_SIZE);
+    lnPrintln("\n习题 ------ ex12.26 ");
+    std::allocator<std::string> alloc;
+    const int DYNAMIC_ARRAY_SIZE = 2;
+    auto const start = alloc.allocate(DYNAMIC_ARRAY_SIZE);
+    std::string s;
+    auto next_start = start;
+    std::cout << "input " << DYNAMIC_ARRAY_SIZE << " str：";
+    while (next_start != start + DYNAMIC_ARRAY_SIZE && std::cin >> s)
+        alloc.construct(next_start++, s);
 
-    clear_println("\n习题 ------ ex12.27 ");
+    while (next_start != start) {
+        std::cout << *--next_start << " ";
+        alloc.destroy(next_start);
+    }
+    alloc.deallocate(start, DYNAMIC_ARRAY_SIZE);
+
+    lnPrintln("\n习题 ------ ex12.27 ");
     QueryText query27("data/storyDataFile.txt"); // 命令行请用这个
     auto ret27 = query27.find("thing");
     ret27.printResult();
 
     query27.find("sunyd").printResult();
 
-
+    print("enter your word you wanna query: ");
+    string word27;
+    while (cin >> word27) {
+        if (word27 == "eof") break;
+        query27.find(word27).printResult();
+    }
 
     // ----------------------------------------------
-    // clear_println("\n习题 ------ ex10.36 ");
-    // clear_println("\n章节 ------------------ 10.word_transformation_bad.txt");
+    // lnPrintln("\n习题 ------ ex10.36 ");
+    // lnPrintln("\n章节 ------------------ 10.word_transformation_bad.txt");
 
     return 0;
 };

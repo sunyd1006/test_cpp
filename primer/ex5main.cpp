@@ -40,7 +40,7 @@ void declare() {
 
 int main() {
 
-    clear_println("\n习题 ------ ex5_25: ");
+    lnPrintln("\n习题 ------ ex5_25: ");
     un_declare();
     declare();
 

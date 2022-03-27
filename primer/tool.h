@@ -11,30 +11,67 @@
 #include <map>
 #include <list>
 
-inline void println(const char *dis) {
-    std::cout << dis << std::endl;
-}
-
-inline void println(std::string s) {
-    std::cout << s << std::endl;
-}
-
-inline void println() {
-    std::cout << std::endl;
-}
-
-inline void lnprintln(const char *dis) {
-    println();
-    println(dis);
-}
 
 inline void print(std::string str) {
     std::cout << str << " ";
 }
 
+inline void println(const char *dis) {
+    std::cout << dis << std::endl;
+}
+
+inline void println_line() {
+    println("------------------------------");
+}
+
+inline void println(std::string str) {
+    println(str.c_str());
+}
+
+inline void printlnCallFun(const std::string &str) {
+    println(std::string("Call function (") + str + ")\t: ");
+}
+
+inline void printlnCallFunInfo(const std::string &func, std::initializer_list<std::string> info) {
+    std::string ret = std::string("Call function (") + func + "):";
+    for (const auto &item : info) {
+        ret.append(", " + std::string(item));
+    }
+    println(ret);
+}
+
+inline void printlnCallFunInfo(const std::string &func, std::string info) {
+    printlnCallFunInfo(func, {info});
+}
+inline void printlnCallFunInfo(const std::string &func, std::string info1, std::string info2) {
+    printlnCallFunInfo(func, {info1, info2});
+}
+
+inline void println() {
+    println("");
+}
+
+inline void lnPrintln(const char *dis) {
+    println();
+    println(dis);
+}
+
+
+template<typename Pointer>
+inline void printlnPointer(Pointer *ptr) {
+    std::cout << "ptr: " << std::hex << ptr << std::endl;
+}
+
+template<typename Pointer>
+inline void printlnPointer(Pointer *lhs, Pointer *rhs) {
+    std::cout << std::hex << lhs << " vs " << std::hex << rhs << "  eql: " << (lhs == rhs) << std::endl;
+}
+
+
 using Map = std::map<std::string, std::size_t>;
-inline void printMapItem(Map const& m) {
-    for (auto const& kv : m)
+
+inline void printMapItem(Map const &m) {
+    for (auto const &kv : m)
         std::cout << kv.first << " : " << kv.second << "\n";
 }
 
@@ -62,15 +99,15 @@ inline void test_clear() {
     //             + std::string(" test_string_vec.size: ") + std::to_string(test_string_vec.size()));
 }
 
-inline void clear_println(const char *dis) {
-    println();
-    test_clear();
-    println(dis);
-}
+// inline void clear_println(const char *dis) {
+//     println();
+//     test_clear();
+//     println(dis);
+// }
 
 // print a container like vector, deque, list, etc.
 template<typename Sequence>
-inline std::ostream &println(Sequence const &seq, const char *dis) {
+inline std::ostream &println(Sequence const &seq, const std::string &dis) {
     std::cout << dis << " : ";
     for (auto const &elem : seq) {
         // if (typeid(seq) == typeid(std::pair<std::string, std::size_t>)) {

@@ -47,7 +47,6 @@ void printVecByIter(Iter start, Iter end) {
 #ifndef NDEBUG
     cout << "NDEBUG: " << endl;
 #endif
-
     cout << __func__ << ":";
     while (start != end) {
         cout << *start++ << " ";

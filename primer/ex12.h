@@ -25,12 +25,41 @@ class StrBlobPtr;  // 先声明一下，不然后面找不到
 class StrBlob {
     friend class StrBlobPtr;
 
+    friend bool operator==(const StrBlob &lhs, const StrBlob &rhs);
+
+    friend bool operator!=(const StrBlob &lhs, const StrBlob &rhs);
+
+    friend bool operator<(const StrBlob &, const StrBlob &);
+
+    friend bool operator>(const StrBlob &, const StrBlob &);
+
+    friend bool operator<=(const StrBlob &, const StrBlob &);
+
+    friend bool operator>=(const StrBlob &, const StrBlob &);
+
+private:
+    void check(size_type i, const std::string &msg) const;
+
+    std::shared_ptr<std::vector<std::string>> data;
 public:
     typedef std::vector<std::string>::size_type size_type;
 
     StrBlob();
 
     StrBlob(std::initializer_list<std::string> il);
+
+    StrBlob &StrBlob::operator=(const StrBlob &lhs) {
+        data = make_shared < vector < string >> (*lhs.data);
+        return *this;
+    }
+
+    StrBlob &StrBlob::operator=(StrBlob &&rhs) noexcept {
+        if (this != &rhs) {
+            data = std::move(rhs.data);
+            rhs.data = nullptr;
+        }
+        return *this;
+    }
 
     size_type size();
 
@@ -51,17 +80,40 @@ public:
     StrBlobPtr begin() const;// note: const重载类
 
     StrBlobPtr end() const;
-
-private:
-    void check(size_type i, const std::string &msg) const;
-
-    std::shared_ptr<std::vector<std::string>> data;
 };
 
-// 不影响 StrBlob的生存周期，但组织用户访问不存在的StrBlob
+bool operator==(const StrBlob &, const StrBlob &);
+
+bool operator!=(const StrBlob &, const StrBlob &);
+
+bool operator<(const StrBlob &, const StrBlob &);
+
+bool operator>(const StrBlob &, const StrBlob &);
+
+bool operator<=(const StrBlob &, const StrBlob &);
+
+bool operator>=(const StrBlob &, const StrBlob &);
+
+// 不影响 StrBlob的生存周期，但阻止用户访问不存在的StrBlob
 class StrBlobPtr {
     typedef std::vector<std::string>::size_type size_type;
+
+    friend bool operator==(const StrBlobPtr &, const StrBlobPtr &);
+
+    friend bool operator!=(const StrBlobPtr &, const StrBlobPtr &);
+
+    friend bool operator<(const StrBlobPtr &, const StrBlobPtr &);
+
+    friend bool operator>(const StrBlobPtr &, const StrBlobPtr &);
+
+    friend bool operator<=(const StrBlobPtr &, const StrBlobPtr &);
+
+    friend bool operator>=(const StrBlobPtr &, const StrBlobPtr &);
+
 private:
+    std::weak_ptr<std::vector<std::string >> wptr;
+    size_type curr;
+
     auto check(size_type _curr, const std::string &msg) const {
         auto sptr = wptr.lock();
         if (!sptr) throw std::runtime_error("unbound StrBlobPtr");
@@ -71,8 +123,6 @@ private:
         return sptr;
     }
 
-    std::weak_ptr<std::vector<std::string >> wptr;
-    size_type curr;
 public:
     StrBlobPtr() : curr(0) {};
 
@@ -95,8 +145,30 @@ public:
     bool operator!=(const StrBlobPtr &p) {
         return p.curr != curr;
     }
-};
 
+    inline StrBlobPtr &StrBlobPtr::operator++() {
+        check(curr, "increment past end of StrBlobPtr");
+        ++curr;
+        return *this;
+    }
+
+    inline StrBlobPtr &StrBlobPtr::operator--() {
+        check(--curr, "decrement past begin of StrBlobPtr");
+        return *this;
+    }
+
+    inline StrBlobPtr StrBlobPtr::operator++(int) {
+        StrBlobPtr ret = *this;
+        ++*this;
+        return ret;
+    }
+
+    inline StrBlobPtr StrBlobPtr::operator--(int) {
+        StrBlobPtr ret = *this;
+        --*this;
+        return ret;
+    }
+};
 
 class QueryResult {
     using LineNo = std::vector<std::string>::size_type;
@@ -104,10 +176,11 @@ class QueryResult {
 public:
     QueryResult() = delete;
 
-    QueryResult(std::shared_ptr<DataVec> _data, std::pair<std::string, std::set<LineNo>>_ref) : data(_data), ref(_ref) { };
+    QueryResult(std::shared_ptr<DataVec> _data, std::pair<std::string, std::set<LineNo>> _ref) : data(_data),
+                                                                                                 ref(_ref) {};
 
     void printResult() {
-        println(ref.first + " occurs " + std::to_string( ref.second.size()) + std::string("  times"));
+        println(ref.first + " occurs " + std::to_string(ref.second.size()) + std::string("  times"));
         for (const auto &item : ref.second) {
             print(std::string("   (line ") + std::to_string(item + 1) + "\t) " + (*data)[item]);
             println();
@@ -120,12 +193,15 @@ private:
 };
 
 class QueryResult;
+
 class QueryText {
     using LineNo = std::vector<std::string>::size_type;
     using DataVec = std::vector<std::string>;
+
     friend class QueryResult;
+
 public:
-    QueryText() = default;
+    QueryText() = delete;
 
     QueryText(std::string file_name) : data(new DataVec()) {
         std::fstream in(file_name.c_str());
@@ -145,7 +221,7 @@ public:
     }
 
     QueryResult find(std::string word) {
-        static std::set<LineNo > empty_index;
+        static std::set<LineNo> empty_index;
         auto ret = nameIndex.find(word);
         if (ret == nameIndex.end()) {
             return QueryResult(data, {word, empty_index});

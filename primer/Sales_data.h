@@ -12,30 +12,70 @@
 
 class Sales_data { // 第7章 p230
     // 不用 friend 这里是无法访问私有数据成员的。有了friend 相当于不用get/set方法了
-    friend Sales_data add(const Sales_data&, const Sales_data&);
-    friend std::ostream &print(std::ostream& out, const Sales_data& item);
-    friend std::istream &read(std::istream& in, Sales_data& item);
+    friend Sales_data add(const Sales_data &, const Sales_data &);
+
+    friend std::ostream &print(std::ostream &out, const Sales_data &item);
+
+    friend std::istream &read(std::istream &in, Sales_data &item);
+
+    // 重载输入、输出、加法
+    friend std::istream &operator>>(std::istream &, Sales_data &);
+
+    friend std::ostream &operator<<(std::ostream &, const Sales_data &);
+
+    friend Sales_data operator+(const Sales_data &, const Sales_data &);
+
 public:
     Sales_data() = default;
+
     Sales_data(std::istream &is);
-    Sales_data(std::string book): bookNo(book) { };
+
+    Sales_data(std::string book) : bookNo(book) {};
+
     Sales_data(std::string book, unsigned sold, double reve)
-        :bookNo(book), units_sold(sold), revenue(reve) { }
+            : bookNo(book), units_sold(sold), revenue(reve) {}
+
     double getAvgPrice() const;
-    Sales_data& combine(const Sales_data&);
+
+    Sales_data &combine(const Sales_data &);
+
     void printString();
+
     void printHello() {
         std::cout << "hah " << std::endl;
     }
+
     std::string getIsbn() const { return bookNo; } // implicit inline
     unsigned getUnitsSold() const { return units_sold; }
+
     double getRevenue() const { return revenue; }
 
+    Sales_data &operator=(const std::string &rhs) {
+        println("call operator(const std::string &rhs)");
+        *this = Sales_data(rhs);
+        return *this;
+    }
+
+    // Sales_data &operator=(const std::string &rhs) {
+    //     println("call operator(const std::string &rhs)");
+    //     Sales_data tmp = *this;
+    //     tmp.bookNo = rhs;
+    //     return tmp; // todo 返回局部变量的引用，竟然不报错？
+    // }
+
+    Sales_data &operator+=(const Sales_data &); // compound-assignment
+
+    explicit operator std::string() const { return bookNo; }
+
+    explicit operator double() const { return getAvgPrice(); }
+
     static int initByCall();
+
     void printStaticVal() {
         std::cout << " valInner: " << valInner << " valOuter: " << valOuter << " valInitByCall: "
                   << valInitByCall << std::endl;
     }
+
 private:
     std::string bookNo;
     unsigned units_sold = 0;
@@ -47,10 +87,19 @@ private:
 };
 
 // Sales_data相关的非成员函数
-void startMain(std::istream& in, std::ostream& out);
-Sales_data add(const Sales_data&, const Sales_data&);
-std::ostream &print(std::ostream& out, const Sales_data& item);
-std::istream &read(std::istream& in, Sales_data& item);
+void startMain(std::istream &in, std::ostream &out);
+
+Sales_data add(const Sales_data &, const Sales_data &);
+
+std::ostream &print(std::ostream &out, const Sales_data &item);
+
+std::istream &read(std::istream &in, Sales_data &item);
+
+std::istream &operator>>(std::istream &, Sales_data &);
+
+std::ostream &operator<<(std::ostream &, const Sales_data &);
+
+Sales_data operator+(const Sales_data &, const Sales_data &);
 
 // NOTE: 如果read，和 print在这里定义，则会在Sales_data-ea10df.o ex7-6f0e09.o 里面重复的符号
 // std::ostream &print(std::ostream& out, const Sales_data& item) {

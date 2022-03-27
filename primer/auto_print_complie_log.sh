@@ -10,7 +10,7 @@ abs_log_name=$current_floder_name"/"$log_name
 abs_main_name=$current_floder_name"/"$main_name
 
 # :note 配置编辑文件命令
-all_relative_compile_file_name="tool.cpp Sales_data.cpp ex12.cpp ex12main.cpp";
+all_relative_compile_file_name="tool.cpp Sales_data.cpp ex15main.cpp";
 
 #cpp_version="11"
 cpp_version="14"
@@ -30,7 +30,7 @@ function read_file() {
   done < $1
 }
 
-run_compile_param1=$(cd $current_floder_name && g++ -std=c++$cpp_version $all_relative_compile_file_name -o $main_name -g 2>$log_name)
+run_compile_param1=$(cd $current_floder_name && g++ -std=c++$cpp_version $all_relative_compile_file_name -Wall -Wextra -o $main_name -g 2>$log_name)
 
 # :note 配置编辑命令
 #if [ $abs_compile2 ] ; then
@@ -47,6 +47,7 @@ else
     how_many_error=$(grep -cE "error" $abs_log_name | awk '{print $1}')
     if [ $how_many_error -gt 0 ] ; then
         echo -e "\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+        echo -e "vv                                                                              vv"
         echo -e "vv                                                                              vv"
         echo -e "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n"
         read_file $abs_log_name

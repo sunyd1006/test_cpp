@@ -48,7 +48,7 @@ int main() {
     }
     cout << endl;
 
-    clear_println("\n习题 ------ ex3.24 两类迭代器用法");
+    lnPrintln("\n习题 ------ ex3.24 两类迭代器用法");
     vector<int> vec(10, 1);
     for (auto &item : vec) {
         item *= 2;
@@ -60,7 +60,7 @@ int main() {
         cout << *it << " ";
     }
 
-    clear_println("\n习题 ------ ex3.24 两类迭代器用法");
+    lnPrintln("\n习题 ------ ex3.24 两类迭代器用法");
     char a1[] = {'c' , 'p', 'p'};
     char a2[] = {'c' , 'p', 'p', '\0'};
     cout << "size of : " << endl;
