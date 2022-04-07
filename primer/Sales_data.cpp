@@ -7,18 +7,15 @@ int Sales_data::initByCall() {
     return valInitByCall;
 }
 
-
 int Sales_data::valOuter = 2021;
 int Sales_data::valInitByCall = 2021;
 
 // member functions
-Sales_data::Sales_data(std::istream &is) {
-    read(is, *this);
-}
+Sales_data::Sales_data(std::istream &is) { read(is, *this); }
 
 // todo: 必须和声明一致
 double Sales_data::getAvgPrice() const {
-    if (units_sold) return revenue / units_sold; // p232
+    if (units_sold) return revenue / units_sold;  // p232
     return 0;
 }
 
@@ -29,7 +26,8 @@ Sales_data &Sales_data::combine(const Sales_data &item) {
 }
 
 void Sales_data::printString() {
-    std::cout << " bookNo: " << bookNo << " units_sold: " << units_sold << " revenue: " << revenue << std::endl;
+    std::cout << " bookNo: " << bookNo << " units_sold: " << units_sold << " revenue: " << revenue
+              << std::endl;
 }
 
 Sales_data &Sales_data::operator+=(const Sales_data &rhs) {
@@ -37,7 +35,6 @@ Sales_data &Sales_data::operator+=(const Sales_data &rhs) {
     revenue += rhs.revenue;
     return *this;
 }
-
 
 // -----------------------------------   有元函数
 Sales_data add(const Sales_data &left, const Sales_data &right) {
@@ -47,8 +44,8 @@ Sales_data add(const Sales_data &left, const Sales_data &right) {
 }
 
 std::ostream &print(std::ostream &out, const Sales_data &item) {
-    out << "Item(isbn: " << item.getIsbn() << " unitsSold: " << item.getUnitsSold() << " revenue: "
-        << item.getRevenue() << " ) " << std::endl;
+    out << "Item(isbn: " << item.getIsbn() << " unitsSold: " << item.getUnitsSold()
+        << " revenue: " << item.getRevenue() << " ) " << std::endl;
     return out;
 }
 
@@ -65,7 +62,7 @@ void startMain(std::istream &in = std::cin, std::ostream &out = std::cout) {
     if (read(in, total)) {
         // if (std::cin >> total.bookNo >> total.units_sold >> total.revenue) {
 
-        Sales_data trans; // p229
+        Sales_data trans;  // p229
         int twoCaseBreak = 0;
         // const int howManyCase = word_transformation_bad.txt;
         const int howManyCase = 20000;
@@ -95,9 +92,9 @@ std::istream &operator>>(std::istream &in, Sales_data &item) {
 }
 
 std::ostream &operator<<(std::ostream &out, const Sales_data &item) {
-    out << "Item(bookNo: " << item.bookNo << " unitsSold: " << item.units_sold << " price: "
-        << (item.revenue / item.units_sold) << " revenue: "
-        << item.getRevenue() << " ) " << std::endl;
+    out << "Item(bookNo: " << item.bookNo << " unitsSold: " << item.units_sold
+        << " price: " << (item.revenue / item.units_sold) << " revenue: " << item.getRevenue()
+        << " ) " << std::endl;
     return out;
 }
 
@@ -105,4 +102,13 @@ Sales_data operator+(const Sales_data &left, const Sales_data &right) {
     Sales_data sum = left;
     sum.combine(right);
     return sum;
+}
+
+bool operator==(const Sales_data &lhs, const Sales_data &rhs) {
+    return lhs.getIsbn() == rhs.getIsbn() && lhs.units_sold == rhs.units_sold &&
+           lhs.revenue == rhs.revenue;
+}
+
+bool operator!=(const Sales_data &lhs, const Sales_data &rhs) {
+    return !(lhs == rhs);
 }

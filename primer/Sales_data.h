@@ -18,12 +18,19 @@ class Sales_data { // 第7章 p230
 
     friend std::istream &read(std::istream &in, Sales_data &item);
 
-    // 重载输入、输出、加法
+    // 重载输入、输出、加法、等号
     friend std::istream &operator>>(std::istream &, Sales_data &);
 
     friend std::ostream &operator<<(std::ostream &, const Sales_data &);
 
     friend Sales_data operator+(const Sales_data &, const Sales_data &);
+
+    friend bool operator==(const Sales_data &, const Sales_data &);
+
+    friend bool operator!=(const Sales_data &, const Sales_data &);
+
+    // 16.62 重载hash方法
+    friend std::hash<Sales_data>;
 
 public:
     Sales_data() = default;
@@ -100,6 +107,10 @@ std::istream &operator>>(std::istream &, Sales_data &);
 std::ostream &operator<<(std::ostream &, const Sales_data &);
 
 Sales_data operator+(const Sales_data &, const Sales_data &);
+
+bool operator==(const Sales_data &, const Sales_data &);
+
+bool operator!=(const Sales_data &, const Sales_data &);
 
 // NOTE: 如果read，和 print在这里定义，则会在Sales_data-ea10df.o ex7-6f0e09.o 里面重复的符号
 // std::ostream &print(std::ostream& out, const Sales_data& item) {

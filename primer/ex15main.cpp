@@ -1,27 +1,26 @@
+#include <cstring>
 #include <iostream>
 #include <iterator>
-#include <vector>
-#include <cstring>
-#include <stdexcept>
 #include <map>
+#include <stdexcept>
+#include <vector>
 
 // current file include
-#include "ex15.h"
-#include "Sales_data.h"
-#include "Sales_item.h"
-#include "tool.h"
-#include <sstream>
 #include <fstream>
 #include <functional>
+#include <sstream>
+
+#include "Sales_data.h"
+#include "Sales_item.h"
+#include "ex15.h"
+#include "tool.h"
 
 using namespace std;
 
 // define current function
 
 // ex15.12
-void print_debug(const Quote &q) {
-    std::cout << q.debug() << std::endl;
-}
+void print_debug(const Quote &q) { std::cout << q.debug() << std::endl; }
 
 // g14 Sales_data.cpp ex15main.cpp -o main && ./main
 int main() {
@@ -38,7 +37,6 @@ int main() {
     lnPrintln("\n习题 ------ ex15.7 ");
     LimitQuote ex7("ex7", 10, 10, 0.1);
     print_total_info(ex7, 11);
-
 
     lnPrintln("\n习题 ------ ex15.9 ");
     BulkQuote bulk_quote("bulk_quote_1", 10.10, 5, 0.5);
@@ -62,7 +60,6 @@ int main() {
     Quote quote = bulk_quote;
     cout << quote.net_price(5) << endl;
 
-
     lnPrintln("\n习题 ------ ex15.11 ");
     LimitQuote lq11("lq11", 10, 100, 0.1);
     BulkQuote bq11("bq11", 10, 5, 0.5);
@@ -80,10 +77,8 @@ int main() {
     cout << base->debug() << endl;
     println();
 
-
     lnPrintln("\n习题 ------ ex15.17 ");
     // DiscQuote disc17; // ERROR: 定义一个抽象类，应该报错
-
 
     lnPrintln("\n习题 ------ ex15.26 ");
     Quote ex27_default, ex27("ex27", 10), ex27_copy_cons = ex27_default;
@@ -104,7 +99,6 @@ int main() {
         DiscQuote : copy constructor
         BulkQuote : copy constructor
      */
-
 
     lnPrintln("\n习题 ------ ex15.28 ");
     std::vector<Quote> ex28vec;
@@ -145,17 +139,15 @@ int main() {
 
     lnPrintln("\n习题 ------ ex15.30 ");
     Basket basket;
-    for (unsigned i = 0; i != 10; ++i)
-        basket.addItem(BulkQuote("Bible", 20.6, 20, 0.3));
+    for (unsigned i = 0; i != 10; ++i) basket.addItem(BulkQuote("Bible", 20.6, 20, 0.3));
 
     for (unsigned i = 0; i != 10; ++i)
-        basket.addItem(BulkQuote("C++Primer", 30.9, 5, 0.4));
+        basket.addItem(BulkQuote("C++Primer", 30.9, 5, 0.4));  // add item
 
-    for (unsigned i = 0; i != 10; ++i)
-        basket.addItem(Quote("CLRS", 40.1));
+    for (unsigned i = 0; i != 10; ++i) basket.addItem(Quote("CLRS", 40.1));  // add item
 
     cout << basket.getTotalPrice() << endl;
-    cout << (20.6 * 10 +  10 * 30.9 * 0.6 + 40.1 * 10) << endl;
+    cout << (20.6 * 10 + 10 * 30.9 * 0.6 + 40.1 * 10) << endl;
 
     lnPrintln("\n习题 ------ ex15.36 ");
     Query ex36 = Query("fiery") & Query("bird") | Query("wind");
@@ -169,10 +161,17 @@ int main() {
         Call function (AndQuery):, init constructor
         Call function (WordQuery):, init constructor
         Call function (Query):, init constructor, wind
-        Call function (BinaryQuery):, init constructor,  (  ( fiery & bird )  | wind )
-        Call function (OrQuery):, init constructor
-        rep of result:  (  ( fiery & bird )  | wind )
+        Call function (BinaryQuery):, init constructor,  (  ( fiery & bird )  |
+       wind ) Call function (OrQuery):, init constructor rep of result:  (  (
+       fiery & bird )  | wind )
      */
+
+    lnPrintln("\n习题 ------ ex15.40 ");
+    QueryText exFile40("./data/storyDataFile.txt");
+    Query query40 = Query("Daddy") | Query("him");
+    // Query query40 = Query("Daddy") ;
+    QueryResult ret36 = query40.eval(exFile40);
+    ret36.printResult();
 
 
     // ---------------------------------------------

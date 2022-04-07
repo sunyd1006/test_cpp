@@ -1,3 +1,6 @@
 cmake-build-debug/
+build/
 *.DS_Store
 *.o
+*.out
+*.dSYM/

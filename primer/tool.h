@@ -11,6 +11,8 @@
 #include <map>
 #include <list>
 
+#include <sstream>
+
 
 inline void print(std::string str) {
     std::cout << str << " ";
@@ -32,12 +34,13 @@ inline void printlnCallFun(const std::string &str) {
     println(std::string("Call function (") + str + ")\t: ");
 }
 
-inline void printlnCallFunInfo(const std::string &func, std::initializer_list<std::string> info) {
+inline std::string printlnCallFunInfo(const std::string &func, std::initializer_list<std::string> info) {
     std::string ret = std::string("Call function (") + func + "):";
     for (const auto &item : info) {
         ret.append(", " + std::string(item));
     }
     println(ret);
+    return ret;
 }
 
 inline void printlnCallFunInfo(const std::string &func, std::string info) {
@@ -45,6 +48,10 @@ inline void printlnCallFunInfo(const std::string &func, std::string info) {
 }
 inline void printlnCallFunInfo(const std::string &func, std::string info1, std::string info2) {
     printlnCallFunInfo(func, {info1, info2});
+}
+
+inline void printlnDebugTodo(std::string func){
+    println(func + " ------------------- debug for this");
 }
 
 inline void println() {
@@ -63,10 +70,16 @@ inline void printlnPointer(Pointer *ptr) {
 }
 
 template<typename Pointer>
+inline std::string getHexPointer(Pointer *ptr) {
+    std::stringstream out;
+    out << "ptr: " << std::hex << ptr;
+    return out.str();
+}
+
+template<typename Pointer>
 inline void printlnPointer(Pointer *lhs, Pointer *rhs) {
     std::cout << std::hex << lhs << " vs " << std::hex << rhs << "  eql: " << (lhs == rhs) << std::endl;
 }
-
 
 using Map = std::map<std::string, std::size_t>;
 

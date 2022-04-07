@@ -5,12 +5,12 @@
 
 current_floder_name=$(cd $(dirname $0); pwd)      # dirname $0 : 获取目录名
 log_name=sunhu_compile_1005_xx873894873847384.log
-main_name="main"
+main_name="main.out"
 abs_log_name=$current_floder_name"/"$log_name
 abs_main_name=$current_floder_name"/"$main_name
 
 # :note 配置编辑文件命令
-all_relative_compile_file_name="tool.cpp Sales_data.cpp ex15main.cpp";
+all_relative_compile_file_name="tool.cpp Sales_data.cpp ex17main.cpp";
 
 #cpp_version="11"
 cpp_version="14"
