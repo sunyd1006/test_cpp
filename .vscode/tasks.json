@@ -17,6 +17,7 @@
         // 因为g++已经在环境变量中了，所以我们这里写命令就行不用写g++的绝对路径
         "command": "g++",
         "args": [
+          "${fileDirname}/ex19.cpp",
           "${fileDirname}/tool.cpp",
           "${fileDirname}/Sales_data.cpp",
           "${file}", // 表示当前文件（绝对路径）
@@ -57,7 +58,7 @@
           // Controls whether to show the `Terminal will be reused by tasks, press any key to close it` message.
           "showReuseMessage": true, // 就一句话，你想看就true，不想看就false
           // Controls whether the terminal is cleared before executing the task.
-          "clear": false, // 还是保留之前的task输出信息比较好。所以不清理
+          "clear": true, // false保留之前的task输出信息, true不保留比较好
         },
         // Other two choices: options & runOptions (cmd I to use IntelliSense)
         "options": {

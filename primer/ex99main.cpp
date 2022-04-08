@@ -5,8 +5,9 @@
 #include <stdexcept>
 
 // current file include
+#include <tuple>
 
-#include "ex12.h"
+// old
 #include "Sales_data.h"
 #include "Sales_item.h"
 #include "tool.h"
@@ -19,9 +20,6 @@ using namespace std;
 
 // g14 tool.cpp Sales_data.cpp ex12.cpp ex12main.cpp -o main && ./main
 int main() {
-
-
-
 
     lnPrintln("\n习题 ------ ex15. ");
 

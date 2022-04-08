@@ -76,6 +76,7 @@ public:
 
     explicit operator double() const { return getAvgPrice(); }
 
+    static const std::string Sales_data::* data() { return &Sales_data::bookNo; } 
     static int initByCall();
 
     void printStaticVal() {

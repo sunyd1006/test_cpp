@@ -6,6 +6,7 @@
 #include <iterator>
 #include <memory>
 #include <numeric>
+#include <random>  // 随机数
 #include <set>
 #include <sstream>
 #include <string>
@@ -41,6 +42,7 @@ void reportResults(std::istream& in, std::ostream& os,
                    const std::vector<std::vector<Sales_data>>& files) {
     std::string s;
     while (std::cout << "Enter the book ISBN to look for: ", in >> s) {
+        if (s == "eof") return;
         auto trans = findBook(files, s);  // stores that sold this book
         if (trans.empty()) {
             std::cout << s << " not found in any stores." << std::endl;
@@ -67,4 +69,56 @@ std::vector<Sales_data> build_store(const std::string& s) {
     return ret;
 }
 }  // namespace EX04
+
+namespace EX11 {
+using size = std::size_t;
+template <size N>
+class QuizResponses {
+public:
+    QuizResponses() = default;
+    QuizResponses(const std::string& s) : answers(s) {}
+
+    // added a function that takes a question number and a value to indicate
+    // a true/false answer and updates the quiz results accordingly
+    void answer(size n, bool v) { answers.set(n - 1, v); }
+
+    // generate grades on the quiz
+    size score(const QuizResponses& correct) {
+        return (this->answers ^ correct.answers).flip().count() * 1.0 / N * 100;
+    }
+
+private:
+    std::bitset<N> answers;
+};
+
+}  // namespace EX11
+
+unsigned random_gen();
+//! with seed spicified
+unsigned random_gen(unsigned seed);
+//! with seed and range spicified
+unsigned random_gen(unsigned seed, unsigned min, unsigned max);
+
+unsigned random_gen() {
+    static std::default_random_engine e;
+    static std::uniform_int_distribution<unsigned> ud;
+    return ud(e);
+}
+
+unsigned random_gen(unsigned seed) {
+    static std::default_random_engine e(seed);
+    static std::uniform_int_distribution<unsigned> ud;
+    return ud(e);
+}
+
+unsigned random_gen(unsigned seed, unsigned min, unsigned max) {
+    static std::default_random_engine e(seed);
+    static std::uniform_int_distribution<unsigned> ud(min, max);
+    return ud(e);
+}
+
+
+
+
+
 #endif  // TEST_CPP_EX17_H

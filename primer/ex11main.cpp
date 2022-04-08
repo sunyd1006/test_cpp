@@ -200,16 +200,16 @@ int main() {
     test_string_vec.push_back("test_string_vec");
     multiset<string> str_multiset{"mutiset", "mutiset"};
     copy(test_string_vec.begin(), test_string_vec.end(), inserter(str_multiset, str_multiset.end())); // legal
-    println_clear(str_multiset);
+    println(str_multiset);
     // todo // illegal, no `push_back` in `set`.
     // copy(test_string_vec.begin(), test_string_vec.end(),  back_inserter(str_multiset));
     // print(str_multiset);
 
     copy(str_multiset.begin(), str_multiset.end(), inserter(test_string_vec, test_string_vec.end())); // legal.
     std::cout << test_string_vec.size() ;
-    println_clear(test_string_vec);
+    println(test_string_vec);
     copy(str_multiset.begin(), str_multiset.end(), back_inserter(test_string_vec)); // legal.
-    println_clear(test_string_vec);
+    println(test_string_vec);
 
     str_multiset.insert("insertByFunc");
     println(str_multiset);
