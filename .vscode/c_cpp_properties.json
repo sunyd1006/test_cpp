@@ -1,8 +1,12 @@
 {
-    // cpp配置文件
+    /* 
+        cpp配置文件
+        https://blog.csdn.net/qq_34801642/article/details/106419763
+    */
     "configurations": [
         {
             "name": "Mac",
+            // 搜索包含的标头时，IntelliSense 引擎要使用的路径列表
             "includePath": [
                 "${workspaceFolder}/**",
                 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1",
