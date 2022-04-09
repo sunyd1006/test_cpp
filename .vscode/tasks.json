@@ -17,9 +17,9 @@
         // 因为g++已经在环境变量中了，所以我们这里写命令就行不用写g++的绝对路径
         "command": "g++",
         "args": [
-          "${fileDirname}/ex19.cpp",
+        //   "${fileDirname}/ex19.cpp",
           "${fileDirname}/tool.cpp",
-          "${fileDirname}/Sales_data.cpp",
+        //   "${fileDirname}/Sales_data.cpp",
           "${file}", // 表示当前文件（绝对路径）
           // 在这里添加你还需要链接的.cpp文件
           "-o",
