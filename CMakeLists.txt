@@ -19,9 +19,8 @@ add_executable(TEST_CPP ${DIR_SRCS} primer/ex3_36.cpp)
 # 指定生成目标
 add_subdirectory(oop)
 add_subdirectory(basic)
-add_subdirectory(template)
 
 # 添加链接库
-target_link_libraries(TEST_CPP basic oop template )
+target_link_libraries(TEST_CPP basic oop )
 
 add_executable(ex11 primer/ex11main.cpp)

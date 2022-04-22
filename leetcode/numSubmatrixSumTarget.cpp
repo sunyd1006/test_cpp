@@ -37,7 +37,8 @@ public:
 
 int main() {
     int N, M, k;
-    ifstream fileIn("primer/ex99mainInput.txt");
+    ifstream fileIn("./leetcode/numSubmatrixSumTarget.txt");
+    // ifstream fileIn("./numSubmatrixSumTarget.txt");
     string firstLine;
     std::getline(fileIn, firstLine);
     istringstream in_tmp(firstLine);

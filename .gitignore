@@ -1,5 +1,6 @@
 cmake-build-debug/
 build/
+tmp_not_upload/
 *.DS_Store
 *.o
 *.out
