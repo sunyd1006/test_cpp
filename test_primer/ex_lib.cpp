@@ -14,5 +14,5 @@ void swap(int *num1, int *num2) {
 /**
 *
  * g++ ex_lib_static_test_main.cpp -c -o ex_lib_static_test_main.o
- * ar rcs ex_lib_static_test_main.a ex_lib_static_test_main.o
+ * ar rcs include/ex_lib_static.a ex_lib_static_test_main.o
 */

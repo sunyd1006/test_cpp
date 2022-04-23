@@ -5,3 +5,5 @@ tmp_not_upload/
 *.o
 *.out
 *.dSYM/
+*.os
+*.dblite
