@@ -40,22 +40,31 @@ def print_center(contents, sep="-", defaultLen=40):
 # 4.3 本文示例
 SharedLibrary('include/lib_test', ['ex_lib.cpp'])
 env = Environment(CCFLAGS='-D DEBUG')
-env.Program("ex_lib_target", 'ex_lib_main.cpp', LIBS=[
+env.Program("build/ex_lib_target", 'ex_lib_main.cpp', LIBS=[
     'lib_test'], LIBPATH='include')  # 不需要./include
 # ask: LIBPATH包括默认的/usr/lib, /usr/local/lib
 
 # 4.4 参考资料
-# 生成动态库和静态库，放入 include 目录
+"""
+-Wl.-rpath= 用于帮助ex_shared指定搜索第三方库文件的目录，（但不一定需要）
+形如libXXXX.a libXXXX.so的动态库, 它们在 include 目录, 使用方法如下：
+    A.扩展动态库搜索目录 export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH 
+    B. 适用相对路径： g++ main.cpp include/libxxxx.a -o main
+    C. 使用参数指定：g++ main.cpp -Linclude -lxxxx -o mian , 即-L指定目录 -l指定具体动态库
+"""
 # --- 静态库编译和使用命令
 # g++ ex_lib.cpp -c -o ex_lib.o                   # 预编译+编译+汇编
-# ar rcs include/ex_lib_static.a ex_lib.o              # 链接成静态库
-# g++ ex_lib_main.cpp include/ex_lib_static.a -o ex_static && ./ex_static # 使用静态库
+# ar rcs include/libex_lib_static.a ex_lib.o              # 链接成静态库
+# g++ ex_lib_main.cpp include/libex_lib_static.a -o ex_static && ./ex_static # 使用静态库
+# g++ ex_lib_main.cpp -Linclude -lex_lib_static -o ex_static && ./ex_static # 使用静态库
 
 # --- 动态库编译和使用命令
-# g++ ex_lib.o -fPIC -shared -o include/ex_lib_shared.so    # 建立动态链接库
-# 使用时，要么扩展动态库搜索目录 export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH 2. 要么执行是-L指定目录 -l指定具体动态库
-# g++ ex_lib_main.cpp include/ex_lib_shared.so -o ex_shared && ./ex_shared # 使用动态库
-# g++ ex_lib_main.cpp -L/Users/sunyindong/codespace/test_cpp/primer/include -lex_lib_shared -o ex_shared && ./ex_shared # 使用动态库
+# g++ ex_lib.cpp -c -o ex_lib.o                              # 预编译+编译+汇编
+# g++ ex_lib.o -fPIC -shared -o include/libex_lib_shared.so     # 链接链接动态链接库
+# g++ ex_lib_main.cpp include/libex_lib_shared.so -o ex_shared && ./ex_shared # 使用动态库 Method1
+# g++ ex_lib_main.cpp -Linclude -lex_lib_shared  -o ex_shared && ./ex_shared  # 使用动态库 Method2
+
+
 
 # -------------------------- 5 节点对象 --------------------------
 """
@@ -160,7 +169,7 @@ print("CCCOM is:", env.subst('$CCCOM'))
 opt = Environment(CCFLAGS='-O2')
 dbg = Environment(CCFLAGS='-g')
 # dbg.Program(source = ["ex7_main.cpp", "ex7_hello.cpp"])
-dbg.Program(target="ex7_main", source=["ex7_hello.cpp", "ex7_main.cpp"])
+dbg.Program(target="build/ex7_main", source=["ex7_hello.cpp", "ex7_main.cpp"])
 
 # 7.2.8、替换值：Replace方法
 # SCons函数和方法的调用是没有顺序的， 在SConstruct中先Program后Replace，Replace的内容也可能会被应用与上面
@@ -236,6 +245,13 @@ d = env.ParseFlags(["-I/opt/include", ["-L/opt/lib", "-lfoo"]])
 """
 
 # 3、查找已经安装的库信息：ParseConfig函数
+
+"""
+关于 CPPPATH/LIBPATH/LIBS总结:sunyd
+1. $CPPPATH: -I、源文件依赖的h和cpp文件在哪里？, 且这里面的文件内容发生改变后，scons会重新编译当前program
+2. $LIBPATH: -L、指定存放库文件的目录
+3. $LIBS: -l、指定库文件
+"""
 
 
 print_center('scons')

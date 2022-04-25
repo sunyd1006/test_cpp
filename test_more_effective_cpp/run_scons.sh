@@ -10,12 +10,8 @@ scons -Q
 
 print_center "run start"
 
+./build/exsingleItemDemo
 
-./build/ex_lib_target
-
-print_center "run done"
-
-./build/ex7_main
 print_center "run done"
 
 
