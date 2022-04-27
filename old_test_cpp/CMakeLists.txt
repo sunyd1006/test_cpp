@@ -8,19 +8,19 @@ set(CMAKE_CXX_STANDARD 14)
 
 # 查找当前目录下, 即更目录下的所有源文件
 # 并将名称保存到 DIR_SRCS 变量
-aux_source_directory(. DIR_SRCS)
+# aux_source_directory(. DIR_SRCS)
 
 # 指定生成目标
-add_executable(TEST_CPP ${DIR_SRCS} primer/ex3_36.cpp)
+# add_executable(TEST_CPP ${DIR_SRCS} primer/ex3_36.cpp)
 
 # 不包含的文件夹
 #add_executable(TEST_CPP ${DIR_SRCS} test.cpp primer/test_2.cpp)
 
 # 指定生成目标
-add_subdirectory(oop)
-add_subdirectory(basic)
+# add_subdirectory(oop)
+# add_subdirectory(basic)
 
 # 添加链接库
-target_link_libraries(TEST_CPP basic oop )
+# target_link_libraries(TEST_CPP basic oop )
 
-add_executable(ex11 primer/ex11main.cpp)
+# add_executable(ex11 primer/ex11main.cpp)

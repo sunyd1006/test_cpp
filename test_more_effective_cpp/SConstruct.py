@@ -10,6 +10,6 @@ env = Environment(CXXFLAGS="-std=c++11")
 # https://www.cnblogs.com/lihello/p/14435941.html
 
 common_obj_li = Object(Glob('util/*.cpp'))
-exsingleItemDemoLi = ["exSingleObjDemo.cpp"]
-exsingleItemDemoLi += common_obj_li
-env.Program(getBuildTargetName("exsingleItemDemo"), exsingleItemDemoLi, CPPPATH='../util')
+curr_ex_cpp_li = Glob("ex26*.cpp")
+curr_ex_cpp_li += common_obj_li
+env.Program(getBuildTargetName("ex26"), curr_ex_cpp_li, CPPPATH='../util')

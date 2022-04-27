@@ -6,6 +6,8 @@ launch.json: 用于debug的，mac m1用的lldb
 vscode 预定义变量的名字：https://blog.csdn.net/acktomas/article/details/102851702
 // ${workspaceFoler}
 
+code snniptes: 
+https://blog.csdn.net/maokelong95/article/details/54379046
 
 # cpp 代码格式化配置信息，采用google模式
 BasedOnStyle:LLVM

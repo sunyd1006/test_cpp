@@ -121,7 +121,6 @@ int main() {
 
     lnPrintln("\n习题 ------ ex15.29 ");
     std::vector<std::shared_ptr<Quote>> ex29;
-
     for (unsigned i = 1; i != 10; ++i) {
         println_line();
         ex29.push_back(std::make_shared<BulkQuote>(BulkQuote("sss", i * 10.1, 10, 0.3)));
@@ -139,17 +138,22 @@ int main() {
 
     lnPrintln("\n习题 ------ ex15.30 ");
     Basket basket;
-    for (unsigned i = 0; i != 10; ++i) basket.addItem(BulkQuote("Bible", 20.6, 20, 0.3));
+    for (unsigned i = 0; i != 10; ++i) {
+        basket.addItem(BulkQuote("Bible", 20.6, 20, 0.3));
+    }
 
-    for (unsigned i = 0; i != 10; ++i)
+    for (unsigned i = 0; i != 10; ++i) {
         basket.addItem(BulkQuote("C++Primer", 30.9, 5, 0.4));  // add item
+    }
 
-    for (unsigned i = 0; i != 10; ++i) basket.addItem(Quote("CLRS", 40.1));  // add item
+    for (unsigned i = 0; i != 10; ++i) {
+        basket.addItem(Quote("CLRS", 40.1));  // add item
+    }
 
     cout << basket.getTotalPrice() << endl;
     cout << (20.6 * 10 + 10 * 30.9 * 0.6 + 40.1 * 10) << endl;
 
-    lnPrintln("\n习题 ------ ex15.36 ");
+    lnPrintln("\n\n\n习题 ------ ex15.36 ");
     Query ex36 = Query("fiery") & Query("bird") | Query("wind");
     cout << "rep of result: " << ex36 << endl;
     /*
@@ -172,7 +176,6 @@ int main() {
     // Query query40 = Query("Daddy") ;
     QueryResult ret36 = query40.eval(exFile40);
     ret36.printResult();
-
 
     // ---------------------------------------------
     // lnPrintln("\n习题 ------ ex ");

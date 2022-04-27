@@ -268,15 +268,19 @@ inline auto print_total_info(const Quote &item, size_t n) {
 
 // ex 15.30
 class Basket {  // 模拟购物车，其中 Quote 是一条购物记录, 比如1本书，
-    // 10本相同的书有10个 Quote
+                // 10本相同的书有10个 Quote
 private:
-    // todo : 变量未示例化，却访问它的内容。
+    // NOTE: 变量未示例化，却访问它的内容。
     static bool compareBookNo(const std::shared_ptr<Quote> &lhs,
                               const std::shared_ptr<Quote> &rhs) {
         return lhs->isbn() < rhs->isbn();
     }
 
-    std::multiset<std::shared_ptr<Quote>, decltype(compareBookNo) *> items{compareBookNo};
+    // ask: 为什么此句报错
+    std::multiset<std::shared_ptr<Quote>, decltype(compareBookNo) *> items(compareBookNo);
+
+    // ask: 此句正确 
+    // std::multiset<std::shared_ptr<Quote>, decltype(compareBookNo) *> items{compareBookNo};
 
 public:
     void addItem(const Quote &item) { items.insert(std::shared_ptr<Quote>(item.clone())); }

@@ -24,7 +24,7 @@ inline void println_line(int howManyLn = 0) {
 inline void println(std::string str) { println(str.c_str()); }
 
 inline void printlnCallFun(const std::string &str) {
-    println(std::string("Call function (") + str + ")\t: ");
+    println(std::string("Call function (") + str + ")");
 }
 
 inline std::string printlnCallFunInfo(const std::string &func,
