@@ -77,7 +77,9 @@
         "ratio": "cpp",
         "stack": "cpp",
         "filesystem": "cpp",
-        "__hash_table": "cpp"
+        "__hash_table": "cpp",
+        "__bits": "cpp",
+        "complex": "cpp"
     },
     "commentTranslate.targetLanguage": "zh-CN",
     "commentTranslate.hover.enabled": true,

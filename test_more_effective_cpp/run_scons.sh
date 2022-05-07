@@ -3,9 +3,7 @@ function print_center() {
     echo -e "\n"$str" "$1" "$str"\n"
 }
 
-
-scons -Q
-
+scons -Q -c
 
 print_center "run start"
 
@@ -14,6 +12,6 @@ print_center "run start"
 print_center "run done"
 
 
-rm -rf  *.o *.out *.os 
+rm -rf  *.o *.out *.os
 
 # rm -rf *.a *.so 

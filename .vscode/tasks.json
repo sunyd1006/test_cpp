@@ -87,7 +87,7 @@
             "group": "none",
         },
         {
-            "label": "clang_compile_leetcode_dir",
+            "label": "g++_compile_sigle_file",
             "type": "shell", // shell: 输入命令
             "command": "g++",
             "args": [

@@ -23,7 +23,7 @@
             // To launch a task before the start of a debug session, set this attribute to the label of a task specified in tasks.json.
             // NOTE: 不同的任务需要配置
             // "preLaunchTask": "g++_compile_primer_dir", //在调试之前要进行的工作 compile是在 tasks.json 的编译任务里面的label
-            "preLaunchTask": "clang_compile_leetcode_dir", //在调试之前要进行的工作 compile是在 tasks.json 的编译任务里面的label
+            "preLaunchTask": "g++_compile_sigle_file", //在调试之前要进行的工作 compile是在 tasks.json 的编译任务里面的label
             /* ------ Many debuggers support some of the following attributes: ------ */
             // executable or file to run when launching the debugger
             // ！！不要在程序和代码的路径及文件名中出现空格！！否则无法调试（我尝试解决这个问题，但真的无法解决）
@@ -38,6 +38,7 @@
             "stopAtEntry": false,
             // If true, a console is launched for the debuggee.
             // If false, on Linux and Windows, it will appear in the Integrated Console.
+            // NOTE: when on remote-Linux , pleas set it false
             "externalConsole": true,
             // 为true则会打开系统终端在其中进行交互
             // 如果为 true，则为调试对象启动控制台。如果为 false，它在 Linux 和 Windows 上会显示在集成控制台中
@@ -45,7 +46,12 @@
             /* ------ Customizing GDB or LLDB ------ */
             // Indicates the debugger that VS Code will connect to. Must be set to gdb or lldb. 
             // 但是macOS只安装了llbd（有可能是安装命令行工具的时候安装的），那就用lldb吧
-            "MIMode": "lldb",
+            "linux": {
+                "MIMode": "gdb",
+            },
+            "osx": {
+                "MIMode": "lldb"
+            },
         }
     ]
 }

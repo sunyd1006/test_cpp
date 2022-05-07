@@ -1,3 +1,9 @@
+#!/usr/bin/env bash
+function print_center() {
+    str="========================="
+    echo -e "\n"$str" "$1" "$str"\n"
+}
+
 print_center "** Shell菜鸟教程 https://www.runoob.com/linux/linux-shell.html **"
 
 print_center "Shell 变量 https://www.runoob.com/linux/linux-shell-variable.html"
@@ -143,7 +149,7 @@ fi
 print_center "Shell echo命令 https://www.runoob.com/linux/linux-shell-echo.html"
 
 # 输出重定向至文件
-echo "It is a test" > myfile
+echo "It is a test" > data/myfile
 
 
 
@@ -178,7 +184,7 @@ fi
 print_center "Shell 流程控制 https://www.runoob.com/linux/linux-shell-process-control.html"
 a=10
 b=20
-if [ $a == $b ]
+if [ $a -eq $b ]
 then
    echo "a 等于 b"
 elif [ $a -gt $b ]
@@ -199,7 +205,7 @@ done
 
 
 int=1
-while(( $int<=5 ))
+while(( $int <= 5 ) )
 do
     echo '$int is '"$int" 
     let "int++"         # let表达式可以简写$int为int
@@ -276,7 +282,7 @@ funWithParam 1 2 3 4 5 6 7 8 9 34 73
 print_center "Shell 输入/输出重定向 https://www.runoob.com/linux/linux-shell-io-redirections.html"
 
 # 输入定向为input, 输出定向为 output
-wc -l < input > output
+wc -l < data/input > data/output
 
 
 echo  "here document 重定向"
