@@ -6,3 +6,4 @@ add_subdirectory(test)
 
 set(TOP_DIR ${CMAKE_CURRENT_LIST_DIR}/../)
 add_subdirectory(${TOP_DIR}/third_party/gtest gtest)
+add_subdirectory(${TOP_DIR}/util util)

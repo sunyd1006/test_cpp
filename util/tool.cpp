@@ -1,7 +1,5 @@
 //
-// Created by sunyindong
+// Create by sunyindong on 2022/04/25
 //
-
 #include "tool.h"
 
-// define some variables

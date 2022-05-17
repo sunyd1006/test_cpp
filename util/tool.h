@@ -13,6 +13,7 @@
 
 inline void print(std::string str) { std::cout << str << " "; }
 inline void println(const char *dis) { std::cout << dis << std::endl; }
+inline void println(std::string str) { println(str.c_str()); }
 inline void println() { println(""); }
 inline void println_line(int howManyLn = 0) {
     while (howManyLn--) {
@@ -21,7 +22,11 @@ inline void println_line(int howManyLn = 0) {
     println("------------------------------");
 }
 
-inline void println(std::string str) { println(str.c_str()); }
+inline void printInfoLine(std::string info="") {
+    std::string infoReal = info=="" ? " 分隔栏 " : " " + info + " ";
+    std::string line="-----------------------";
+    println(line + infoReal + line);
+}
 
 inline void printlnCallFun(const std::string &str) {
     println(std::string("Call function (") + str + ")");

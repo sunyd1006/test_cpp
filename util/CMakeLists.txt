@@ -1,7 +1,13 @@
+
+
 project(util)
 
-set(LIBRARIES test pthread)
-set(SOURCE_FILES main.cpp)
+# 定义需要参与编译的源文件
+aux_source_directory(. source)
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
+# 把源码添加进来参与编译
+add_library(${PROJECT_NAME} ${source})
+
+
+# 定义需要暴露的头文件
+target_include_directories(${PROJECT_NAME} PUBLIC ./)
