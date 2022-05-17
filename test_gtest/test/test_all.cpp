@@ -1,7 +1,15 @@
-#include "gtest/gtest.h"
-#include "add.h"
+//
+// Created by sunyindong.syd on 2022/5/16.
+//
 
-int main(int argc, char **argv) {
+#include <vector>
+
+#include "add.h"
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
+
+// 测试所有单测
+int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }

@@ -79,7 +79,11 @@
         "filesystem": "cpp",
         "__hash_table": "cpp",
         "__bits": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "any": "cpp",
+        "condition_variable": "cpp",
+        "thread": "cpp",
+        "variant": "cpp"
     },
     "commentTranslate.targetLanguage": "zh-CN",
     "commentTranslate.hover.enabled": true,

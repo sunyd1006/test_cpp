@@ -3,22 +3,22 @@ BasedOnStyle: Google
 AccessModifierOffset: -4
 AlignAfterOpenBracket: Align       # ali: DontAlign
 AlignOperands: false
-ColumnLimit: 95                   # ali: 90  
+ColumnLimit: 95                   # ali: 90
 ConstructorInitializerIndentWidth: 8 # ali： 8
 ContinuationIndentWidth: 4         # ali: 8
 DerivePointerAlignment: false
 IncludeCategories:
-- Priority: 2
-  Regex: '^<' # Like <vector>
 - Priority: 1
-  Regex: '^"' # Like "statistic_info.h" # ----------------------- ali include order
+  Regex: '^<' # Like <vector>
+- Priority: 2
+  Regex: '^"' # Like "statistic_info.h" #
 IndentWidth: 4
 SpacesBeforeTrailingComments: 1
 Standard: c++11
 # https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 AlignTrailingComments: true
 AllowShortBlocksOnASingleLine: Never
-AllowShortFunctionsOnASingleLine: Inline 
+AllowShortFunctionsOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: Never
 AlwaysBreakTemplateDeclarations: Yes
 AllowShortLambdasOnASingleLine: Empty
