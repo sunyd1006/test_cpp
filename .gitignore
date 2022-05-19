@@ -8,3 +8,4 @@ tmp_not_upload/
 *.os
 *.dblite
 .idea/*
+third_party/*
