@@ -9,4 +9,4 @@ tmp_not_upload/
 *.dblite
 .idea/*
 third_party/*
-main
+*/main
