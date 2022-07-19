@@ -48,7 +48,7 @@ env.Program("build/ex_lib_target", 'ex_lib_main.cpp', LIBS=[
 """
 -Wl.-rpath= 用于帮助ex_shared指定搜索第三方库文件的目录，（但不一定需要）
 形如libXXXX.a libXXXX.so的动态库, 它们在 include 目录, 使用方法如下：
-    A.扩展动态库搜索目录 export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH 
+    A.扩展动态库搜索目录 export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
     B. 适用相对路径： g++ main.cpp include/libxxxx.a -o main
     C. 使用参数指定：g++ main.cpp -Linclude -lxxxx -o mian , 即-L指定目录 -l指定具体动态库
 """
@@ -127,7 +127,7 @@ Depends(hello,goodbye)
 
 version_obj = Object('version.c')
 hello = Program('hello.c', LINKFLAGS = str(version_obj[0]))
-Requires(hello, version_obj) 
+Requires(hello, version_obj)
 
 
 9、AlwaysBuild函数
