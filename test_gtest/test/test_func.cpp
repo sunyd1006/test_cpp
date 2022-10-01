@@ -11,67 +11,114 @@ using namespace testing;
 
 // https://google.github.io/googletest/gmock_cook_book.html
 namespace sun_test_gtest {
-    class NeedBeMock;
-    typedef std::shared_ptr<NeedBeMock> NeedBeMockPtr;
+    class InnerClass;
+    typedef std::shared_ptr<InnerClass> InnerClassPtr;
 
     class Master;
     typedef std::shared_ptr<Master> MasterPtr;
 
-    class NeedBeMock {
+    struct Param {
+        string name;
+        string desc;
+
+        string toString() const {
+            string ret;
+            ret.append("Param( ");
+            ret.append("name: " + name + " , ");
+            ret.append("desc: " + desc + " )" );
+            return ret;
+        }
+    };
+
+    class InnerClass {
     private:
         int count;
     public:
-        NeedBeMock() {}
+        InnerClass() {}
 
-        NeedBeMock(int c) : count(c) {}
+        InnerClass(int c) : count(c) {}
 
-        string getStringNull() { return string("Null"); }
+        virtual string getStringNull() { return string("Null"); }
 
-        string getStringValue(int c) { return std::to_string(c); }
+        virtual string getStringValue(int c) { return std::to_string(c); }
 
-        int setArgPointeeDemo(int *param1, vector<int> &testVector) {
+        virtual int setArgPointeeDemo(int *param1, vector<int> &testVector) {
             *param1 = 10000;
             testVector.push_back(100001);
             testVector.push_back(100002);
             testVector.push_back(100003);
             return 0;
         }
+
+        virtual string PrintParam(const Param& param) {
+            std::cout << param.toString() << std::endl;
+            return "call inner.PrintParam";
+        }
     };
 
-    class MockNeedBeMock : public NeedBeMock {
+    class MockInnerClass : public InnerClass {
     public:
-        MockNeedBeMock() {} // not ;
-        MockNeedBeMock(int c) : NeedBeMock(c) {}
+        MockInnerClass() {} // not ;
+        MockInnerClass(int c) : InnerClass(c) {}
         MOCK_METHOD0(getStringNull, string());
         MOCK_METHOD1(getStringValue, string(int c));
+        MOCK_METHOD1(PrintParam, string(const Param& param));
         MOCK_METHOD2(setArgPointeeDemo, int(int* param1, vector<int> &testVector));
     };
 
     class Master {
     private:
-        NeedBeMockPtr mNeedBeMockPtr;
+        InnerClassPtr mInnerClassPtr;
     public:
         Master() {}
-        Master(NeedBeMockPtr needBeMockPtr) : mNeedBeMockPtr(needBeMockPtr) {}
+        Master(InnerClassPtr InnerClassPtr) : mInnerClassPtr(InnerClassPtr) {}
 
-        void master_call_NeedBeMock_func() {
+        void Call_InnerFunc() {
             int* testInt;
             vector<int> testVec;
-            int res =  mNeedBeMockPtr->setArgPointeeDemo(testInt, testVec);
-            print("call NeedBeMock(setArgPointeeDemo)");
+            int res =  mInnerClassPtr->setArgPointeeDemo(testInt, testVec);
+            print("call InnerClass(setArgPointeeDemo)");
             print(std::string("调用返回参数param1：") + std::to_string(*testInt));
             println(testVec, "调用返回参数testVec: ");
         }
     };
+
+    MATCHER_P(ParamObjMatcher, other, "Param is Equal") {
+        bool ret = (static_cast<Param>(arg).name == other.name);
+        cout << "IsMatcherSuccess: " << ret << endl;
+        return static_cast<Param>(arg).name == other.name;
+    }
 
     class TestMain : public ::testing::Test {
     public:
         TestMain() {}
     };
 
+    TEST_F(TestMain, Macher_p) {
+        // NOTE: 注意关于 shared_ptr的写法，对new出来的指针进行stub， 用mockPtr来使用
+        MockInnerClass *mock = new MockInnerClass();
+        InnerClassPtr mockPtr(mock);
+
+        Param param;
+        param.name = "sunyindong";
+
+        EXPECT_CALL(*mock, PrintParam(_))
+            .WillRepeatedly(Return(param.name + "ReturnByMock"));
+
+        EXPECT_CALL(*mock, PrintParam(ParamObjMatcher(param)))
+            .WillOnce(Return(param.name + "ReturnByYes"));
+
+        string stringRet = mockPtr->PrintParam(param);
+        std::cout << stringRet << std::endl;
+
+//        EXPECT_EQ(stringRet, param.name + "ReturnByMock");
+        EXPECT_EQ(stringRet, param.name + "ReturnByYes");
+
+    }
+
     TEST_F(TestMain, SetArgPointee) {
-        MockNeedBeMock *mock = new MockNeedBeMock();
-        NeedBeMockPtr mockPtr(mock);
+        MockInnerClass *mock = new MockInnerClass();
+        InnerClassPtr mockPtr(mock);
         // SetArgPointee :设置第1（0，1）个参数为，指向5的指针。
         // MOCK_METHOD(void, Mutate, (bool mutate, int* value), (override));
         // EXPECT_CALL(mutator, Mutate(true, _)).WillOnce(SetArgPointee<1>(5));
@@ -83,21 +130,22 @@ namespace sun_test_gtest {
                 .WillRepeatedly(
                         DoAll(SetArgPointee<0>(5), SetArgReferee<1>(testVec), Return(1)));
 
-        printInfoLine("Call master_call_NeedBeMock_func");
+        printInfoLine("Call Call_InnerFunc");
         Master master(mockPtr);
-        master.master_call_NeedBeMock_func();
+        master.Call_InnerFunc();
 
         // 无法设定masterPtr参数，放弃
         // MasterPtr masterPtr(mockPtr);
-        // masterPtr->master_call_NeedBeMock_func();
-        // cout << "Call master_call_NeedBeMock_func result end: " << endl;
+        // masterPtr->Call_InnerFunc();
+        // cout << "Call Call_InnerFunc result end: " << endl;
     }
 
     // 测试 expect_call的调用次数
     TEST_F(TestMain, Times_WillOne) {
-        MockNeedBeMock mock; // MockNeedBeMock mock2(0);
+        MockInnerClass mock; // MockInnerClass mock2(0);
         EXPECT_CALL(mock, getStringNull()).Times(2);
         EXPECT_CALL(mock, getStringValue(_)).Times(1); // #1: EXPECT_CALL
+
         // 正确调用
         mock.getStringNull();
         mock.getStringNull();
@@ -148,7 +196,7 @@ namespace sun_test_gtest {
 
     // 测试调用 应当按照EXPECT_CALL的声明顺序调用, 而不能够调换
     TEST_F(TestMain, InSequence) {
-        MockNeedBeMock mock;
+        MockInnerClass mock;
         {
             InSequence seq;
             EXPECT_CALL(mock, getStringNull()).WillRepeatedly(Return(" mock call getStringNull(): "));
@@ -171,7 +219,7 @@ namespace sun_test_gtest {
     // 被测试函数调用一定次数后，就禁用EXPECT_CALL()
     // https://google.github.io/googletest/gmock_cook_book.html#controlling-when-an-expectation-retires
     TEST_F(TestMain, RetiresOnSaturation) {
-        MockNeedBeMock mock;
+        MockInnerClass mock;
 
         EXPECT_CALL(mock, getStringValue(_)).WillRepeatedly(Return("not10"));
         EXPECT_CALL(mock, getStringValue(10)).WillOnce(Return("yes10"));

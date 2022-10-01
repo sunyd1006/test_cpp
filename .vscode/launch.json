@@ -10,8 +10,8 @@
             // The type of debugger to use for this launch configuration.
             "type": "cppdbg", // C++ debug
             // The request type of this launch configuration. Currently, launch and attach are supported.
-            //   If you come from a server or desktop background, 
-            //   it's quite normal to have your editor launch your process for you, 
+            //   If you come from a server or desktop background,
+            //   it's quite normal to have your editor launch your process for you,
             //   and your editor automatically attaches its debugger to the newly launched process.
             //   A launch configuration starts your app in debug mode before VS Code attaches to it.
             // 大概意思是说，如果你开始debug的时候你的项目已经启起来了，那就attach（把debug的工具附加上去）
@@ -39,12 +39,12 @@
             // If true, a console is launched for the debuggee.
             // If false, on Linux and Windows, it will appear in the Integrated Console.
             // NOTE: when on remote-Linux , pleas set it false
-            "externalConsole": true,
-            // 为true则会打开系统终端在其中进行交互
             // 如果为 true，则为调试对象启动控制台。如果为 false，它在 Linux 和 Windows 上会显示在集成控制台中
-            // macOS不适用：https://code.visualstudio.com/docs/cpp/launch-json-reference#_externalconsole
+            // but macOS不适用：https://code.visualstudio.com/docs/cpp/launch-json-reference#_externalconsole
+            "externalConsole": false,
+
             /* ------ Customizing GDB or LLDB ------ */
-            // Indicates the debugger that VS Code will connect to. Must be set to gdb or lldb. 
+            // Indicates the debugger that VS Code will connect to. Must be set to gdb or lldb.
             // 但是macOS只安装了llbd（有可能是安装命令行工具的时候安装的），那就用lldb吧
             "linux": {
                 "MIMode": "gdb",
